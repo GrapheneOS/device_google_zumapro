@@ -524,4 +524,7 @@
 
     <!-- The intent action to handle oem-enabled satellite SOS messaging. -->
     <string name="config_satellite_emergency_handover_intent_action">com.google.android.apps.stargate.ACTION_ESOS_QUESTIONNAIRE</string>
+
+    <!-- Whether device supports increased touch sensitvity -->
+    <bool name="config_supportGloveMode">true</bool>
 </resources>
