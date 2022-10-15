@@ -594,4 +594,7 @@
     <integer-array name="config_verizon_satellite_enabled_tagids">
         <item>1001</item>
     </integer-array>
+
+    <!-- Whether device supports increased touch sensitvity -->
+    <bool name="config_supportGloveMode">true</bool>
 </resources>
