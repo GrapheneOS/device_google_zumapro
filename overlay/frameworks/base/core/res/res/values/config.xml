@@ -537,4 +537,7 @@
     <!-- User activity timeout: Maximum screen dim duration as a percentage of screen off timeout.
     -->
     <fraction name="config_maximumScreenDimRatio">33%</fraction>
+
+    <!-- Whether device supports increased touch sensitvity -->
+    <bool name="config_supportGloveMode">true</bool>
 </resources>
