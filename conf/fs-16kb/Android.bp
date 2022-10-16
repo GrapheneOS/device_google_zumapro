@@ -118,9 +118,9 @@ genrule {
         "fstab.rw.zumapro.16kb",
     ],
     out: ["fstab.zuma-fips"],
-    cmd: "sed -e s/@fileencryption@/fileencryption=aes-256-xts/" +
+    cmd: "sed -e s/@fileencryption@/fileencryption=::inlinecrypt_optimized+wrappedkey_v0/" +
         " -e s/@inlinecrypt@/inlinecrypt/ " +
-        " -e s/@metadata_encryption@/metadata_encryption=aes-256-xts/ $(in) > $(out)",
+        " -e s/@metadata_encryption@/metadata_encryption=:wrappedkey_v0/ $(in) > $(out)",
 }
 
 genrule {
@@ -130,9 +130,9 @@ genrule {
         "fstab.rw.zumapro.16kb",
     ],
     out: ["fstab.zumapro-fips"],
-    cmd: "sed -e s/@fileencryption@/fileencryption=aes-256-xts/" +
+    cmd: "sed -e s/@fileencryption@/fileencryption=::inlinecrypt_optimized+wrappedkey_v0/" +
         " -e s/@inlinecrypt@/inlinecrypt/ " +
-        " -e s/@metadata_encryption@/metadata_encryption=aes-256-xts/ $(in) > $(out)",
+        " -e s/@metadata_encryption@/metadata_encryption=:wrappedkey_v0/ $(in) > $(out)",
 }
 
 prebuilt_etc {
