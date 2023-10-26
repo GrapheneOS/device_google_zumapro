@@ -65,9 +65,6 @@ PRODUCT_VENDOR_PROPERTIES += \
 ifeq (,$(filter %_fullmte,$(TARGET_PRODUCT)))
 ifeq (,$(filter eng,$(TARGET_BUILD_VARIANT)))
 PRODUCT_PRODUCT_PROPERTIES += ro.arm64.memtag.bootctl_supported=1
-PRODUCT_PRODUCT_PROPERTIES += persist.arm64.memtag.app.com.android.se=off
-PRODUCT_PRODUCT_PROPERTIES += persist.arm64.memtag.app.com.google.android.bluetooth=off
-PRODUCT_PRODUCT_PROPERTIES += persist.arm64.memtag.app.com.android.nfc=off
 PRODUCT_PRODUCT_PROPERTIES += persist.arm64.memtag.system_server=off
 endif
 endif
