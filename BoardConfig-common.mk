@@ -27,10 +27,10 @@ TARGET_SOC_NAME := google
 USES_DEVICE_GOOGLE_ZUMAPRO := true
 
 TARGET_ARCH := arm64
-TARGET_ARCH_VARIANT := armv8-2a
+TARGET_ARCH_VARIANT := armv8-2a-dotprod
 TARGET_CPU_ABI := arm64-v8a
-TARGET_CPU_VARIANT := cortex-a55
-TARGET_CPU_VARIANT_RUNTIME := cortex-a55
+TARGET_CPU_VARIANT := cortex-a76
+TARGET_CPU_VARIANT_RUNTIME := cortex-a76
 TARGET_HAS_ARM_MTE := true
 
 BOARD_KERNEL_CMDLINE += dyndbg=\"func alloc_contig_dump_pages +p\"
