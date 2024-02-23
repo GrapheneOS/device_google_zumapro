@@ -55,6 +55,7 @@ using aidl::android::frameworks::stats::IStats;
 using android::base::GetProperty;
 using android::base::Join;
 using android::base::ParseUint;
+using android::base::SetProperty;
 using android::base::Tokenize;
 using android::base::Trim;
 using android::hardware::google::pixel::getStatsService;
@@ -92,6 +93,8 @@ constexpr char kStatusPath[] = "contaminant_detection_status";
 constexpr char kSinkLimitEnable[] = "usb_limit_sink_enable";
 constexpr char kSourceLimitEnable[] = "usb_limit_source_enable";
 constexpr char kSinkLimitCurrent[] = "usb_limit_sink_current";
+constexpr char kCcToggleEnable[] = "cc_toggle_enable";
+constexpr char kDataPathEnable[] = "data_path_enable";
 constexpr char kTypecPath[] = "/sys/class/typec";
 constexpr char kDisableContatminantDetection[] = "vendor.usb.contaminantdisable";
 constexpr char kOverheatStatsPath[] = "/sys/devices/platform/google,usbc_port_cooling_dev/";
@@ -2058,6 +2061,114 @@ status_t Usb::handleShellCommand(int in, int out, int err, const char** argv,
                  "  The settings take effect next time the hub is enabled\n");
 
     return ::android::NO_ERROR;
+}
+
+using ext::PortSecurityState;
+using ext::IUsbExt;
+
+static int WriteStringToFileOrLog(string val, string path) {
+    if (WriteStringToFile(val, path)) {
+        ALOGD("written %s to %s", val.c_str(), path.c_str());
+        return 1;
+    }
+    ALOGE("unable to write %s to %s", val.c_str(), path.c_str());
+    return 0;
+}
+
+int UsbExt::setPortSecurityStateInner(PortSecurityState in_state) {
+    if (mUsb->mI2cClientPath.empty()) {
+        for (int i = 0; i < NUM_HSI2C_PATHS; i++) {
+            mUsb->mI2cClientPath = getI2cClientPath(kHsi2cPaths[i], kTcpcDevName, kI2cClientId);
+            if (!mUsb->mI2cClientPath.empty()) {
+                break;
+            }
+        }
+    }
+
+    if (mUsb->mI2cClientPath.empty()) {
+        ALOGE("%s: Unable to locate i2c bus node", __func__);
+        return IUsbExt::ERROR_NO_I2C_PATH;
+    }
+
+    string ccToggleEnablePath = mUsb->mI2cClientPath + kCcToggleEnable;
+    string dataPathEnablePath = mUsb->mI2cClientPath + kDataPathEnable;
+
+    bool denyNewUsbWriteResult = SetProperty("security.deny_new_usb2",
+                                             in_state == PortSecurityState::ENABLED ? "0" : "1");
+    if (!denyNewUsbWriteResult) {
+        ALOGE("unable to update security.deny_new_usb2 sysprop");
+    }
+
+    // '&' is used instead of '&&' intentionally to disable short-circuit evaluation
+
+    switch (in_state) {
+        case PortSecurityState::DISABLED: {
+            if (WriteStringToFileOrLog("0", ccToggleEnablePath)
+                    & WriteStringToFileOrLog("0", dataPathEnablePath)) {
+                break;
+            }
+            return IUsbExt::ERROR_FILE_WRITE;
+        }
+        case PortSecurityState::CHARGING_ONLY_IMMEDIATE: {
+            if (WriteStringToFileOrLog("0", dataPathEnablePath)
+                    & WriteStringToFileOrLog("1", ccToggleEnablePath)) {
+                break;
+            }
+            return IUsbExt::ERROR_FILE_WRITE;
+        }
+        case PortSecurityState::CHARGING_ONLY: {
+            if (WriteStringToFileOrLog("-1", dataPathEnablePath)
+                    & WriteStringToFileOrLog("1", ccToggleEnablePath)) {
+                break;
+            }
+            return IUsbExt::ERROR_FILE_WRITE;
+        }
+        case PortSecurityState::ENABLED: {
+            if (WriteStringToFileOrLog("1", dataPathEnablePath)
+                    & WriteStringToFileOrLog("1", ccToggleEnablePath)) {
+                break;
+            }
+            return IUsbExt::ERROR_FILE_WRITE;
+        }
+    }
+
+    if (!denyNewUsbWriteResult) {
+        return IUsbExt::ERROR_DENY_NEW_USB_WRITE;
+    }
+
+    return IUsbExt::NO_ERROR;
+}
+
+// keep in sync with frameworks/base/core/java/android/ext/settings/UsbPortSecurity.java
+static const int MODE_DISABLED = 0;
+static const int MODE_CHARGING_ONLY = 1;
+static const int MODE_CHARGING_ONLY_WHEN_LOCKED = 2;
+static const int MODE_CHARGING_ONLY_WHEN_LOCKED_AFU = 3;
+static const int MODE_ENABLED = 4;
+
+UsbExt::UsbExt(std::shared_ptr<Usb> usb) : mUsb(usb) {
+    int initialMode = ::android::base::GetIntProperty("persist.security.usb_mode", MODE_CHARGING_ONLY_WHEN_LOCKED);
+    ALOGD("initial persist.security.usb_mode: %i", initialMode);
+
+    switch (initialMode) {
+        case MODE_CHARGING_ONLY:
+        case MODE_CHARGING_ONLY_WHEN_LOCKED:
+            setPortSecurityStateInner(PortSecurityState::CHARGING_ONLY_IMMEDIATE);
+            break;
+        case MODE_CHARGING_ONLY_WHEN_LOCKED_AFU:
+        case MODE_ENABLED:
+            setPortSecurityStateInner(PortSecurityState::ENABLED);
+            break;
+    }
+}
+
+ScopedAStatus UsbExt::setPortSecurityState(const std::string& in_portName,
+        PortSecurityState in_state, const shared_ptr<IPortSecurityStateCallback>& in_callback) {
+    int res = setPortSecurityStateInner(in_state);
+    if (in_callback != nullptr) {
+        in_callback->onSetPortSecurityStateCompleted(res, 0, "");
+    }
+    return ScopedAStatus::ok();
 }
 
 } // namespace usb
