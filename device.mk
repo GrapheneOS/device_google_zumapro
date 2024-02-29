@@ -928,21 +928,6 @@ PRODUCT_PACKAGES += ShannonIms
 
 PRODUCT_PACKAGES += ShannonRcs
 
-ifeq (,$(filter aosp_% factory_%,$(TARGET_PRODUCT)))
-#ImsMediaAoc library
-FEATURE_TYPE := oem_audio
-SOONG_CONFIG_NAMESPACES += audio_lib
-SOONG_CONFIG_audio_lib += \
-        audio_type
-
-SOONG_CONFIG_audio_lib_audio_type := $(FEATURE_TYPE)
-endif
-
-# ImsMedia
-PRODUCT_PACKAGES += \
-	ImsMediaService \
-	libimsmedia
-
 # Exynos RIL and telephony
 # Multi SIM(DSDS)
 SIM_COUNT := 2
@@ -1194,8 +1179,8 @@ PRODUCT_COPY_FILES += \
         device/google/zumapro/telephony/sats2.dat:$(TARGET_COPY_OUT_VENDOR)/etc/telephony/sats2.dat
 
 # Touch service
+include hardware/google/pixel/input/twoshay.mk
 include device/google/gs-common/touch/twoshay/aidl_zuma.mk
-include device/google/gs-common/touch/twoshay/twoshay.mk
 
 PRODUCT_CHECK_VENDOR_SEAPP_VIOLATIONS := true
 
