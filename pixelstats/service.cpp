@@ -76,7 +76,10 @@ const struct SysfsCollector::SysfsPaths sysfs_paths = {
     },
     .ModemPcieLinkStatsPath = "/sys/devices/platform/12100000.pcie/link_stats",
     .WifiPcieLinkStatsPath = "/sys/devices/platform/13120000.pcie/link_stats",
-    .GMSRPath = "/sys/class/power_supply/max77779fg/gmsr",
+    .GMSRPath = {
+        "/sys/class/power_supply/max77779fg/gmsr",
+        "/sys/class/power_supply/maxfg_base/gmsr",
+    },
     .PDMStatePath = "/sys/devices/platform/audiometrics/pdm_state",
     .WavesPath = "/sys/devices/platform/audiometrics/waves",
     .AdaptedInfoCountPath = "/sys/devices/platform/audiometrics/adapted_info_active_count",
