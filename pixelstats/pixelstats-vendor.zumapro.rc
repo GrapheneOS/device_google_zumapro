@@ -1,7 +1,8 @@
 on property:sys.boot_completed=1
 	chown system system /sys/class/power_supply/max77779fg/fg_learning_events
+	chown system system /sys/class/power_supply/max77779fg/fg_abnormal_events
 	chown system system /sys/class/power_supply/maxfg_base/fg_learning_events
-    chown system system /sys/devices/platform/maxim,max77779fwu/update_stats
+	chown system system /sys/devices/platform/maxim,max77779fwu/update_stats
 	start vendor.pixelstats_vendor
 on post-fs-data
     chown system system /sys/kernel/metrics/irq/stats_reset

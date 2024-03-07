@@ -104,7 +104,8 @@ const struct UeventListener::UeventPaths ueventPaths = {
         .FGModelLoadingPath = {
             "/sys/class/power_supply/max77779fg/model_state",
             "/sys/class/power_supply/maxfg_base/model_state"
-        }
+        },
+	.FGAbnlPath = "/sys/class/power_supply/max77779fg/fg_abnormal_events"
  };
 
 int main() {
