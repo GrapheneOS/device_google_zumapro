@@ -966,13 +966,21 @@ PRODUCT_PACKAGES += modem_svc_sit
 # modem_ml_svc_sit daemon
 PRODUCT_PACKAGES += modem_ml_svc_sit
 
+# Modem ML TFLite service.
+PRODUCT_PACKAGES += modemml-tflite-service \
+	libtensorflowlite_jni
+
+PRODUCT_SYSTEM_SERVER_JARS += modemml-tflite-service
+
 # modem ML models configs
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_COPY_FILES += \
-	device/google/zumapro/modem_ml/modem_ml_models_userdebug.conf:$(TARGET_COPY_OUT_VENDOR)/etc/modem_ml_models.conf
+	device/google/zumapro/modem_ml/modem_ml_nnapi_models_userdebug.conf:$(TARGET_COPY_OUT_VENDOR)/etc/modem_ml_models.conf \
+	device/google/zumapro/modem_ml/modem_ml_tflite_models_userdebug.conf:$(TARGET_COPY_OUT_VENDOR)/etc/modem_ml_tflite_models.conf
 else
 PRODUCT_COPY_FILES += \
-	device/google/zumapro/modem_ml/modem_ml_models_user.conf:$(TARGET_COPY_OUT_VENDOR)/etc/modem_ml_models.conf
+	device/google/zumapro/modem_ml/modem_ml_nnapi_models_user.conf:$(TARGET_COPY_OUT_VENDOR)/etc/modem_ml_models.conf \
+	device/google/zumapro/modem_ml/modem_ml_tflite_models_user.conf:$(TARGET_COPY_OUT_VENDOR)/etc/modem_ml_tflite_models.conf
 endif
 
 # modem logging binary/configs

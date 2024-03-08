@@ -300,6 +300,12 @@
         <item>com.bilibili.app.in:0.07</item>
         <item>com.twitter.android:0.07</item>
         <item>com.google.android.youtube:0.07</item>
+     </string-array>
+
+    <!-- Class names of device-specific services inheriting com.android.server.SystemService. The
+         classes are instantiated in the order of the array. -->
+    <string-array translatable="false" name="config_deviceSpecificSystemServices">
+        <item>com.android.server.modemml.TFLiteService</item>
     </string-array>
 
     <!-- Pre-scale volume at volume step 1 for Absolute Volume -->
