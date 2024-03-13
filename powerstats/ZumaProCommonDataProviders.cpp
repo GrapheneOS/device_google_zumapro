@@ -656,6 +656,13 @@ void addDisplayMrr(std::shared_ptr<PowerStats> p) {
     addDisplayMrrByEntity(p, "Display", "/sys/class/drm/card0/device/primary-panel/");
 }
 
+void addDisplayVrr(std::shared_ptr<PowerStats> p, std::string name) {
+    auto provider = std::make_unique<PixelStateResidencyDataProvider>();
+    provider->addEntity(name, {});
+    provider->start();
+    p->addStateResidencyDataProvider(std::move(provider));
+}
+
 void addZumaProCommonDataProviders(std::shared_ptr<PowerStats> p) {
     setEnergyMeter(p);
 

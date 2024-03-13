@@ -80,6 +80,14 @@ const struct SysfsCollector::SysfsPaths sysfs_paths = {
         "/sys/class/power_supply/max77779fg/gmsr",
         "/sys/class/power_supply/maxfg_base/gmsr",
     },
+    .FGLearningPath = {
+        "/sys/class/power_supply/max77779fg/fg_learning_events",
+        "/sys/class/power_supply/maxfg_base/fg_learning_events"
+    },
+    .FGModelLoadingPath = {
+        "/sys/class/power_supply/max77779fg/model_state",
+        "/sys/class/power_supply/maxfg_base/model_state"
+    },
     .PDMStatePath = "/sys/devices/platform/audiometrics/pdm_state",
     .WavesPath = "/sys/devices/platform/audiometrics/waves",
     .AdaptedInfoCountPath = "/sys/devices/platform/audiometrics/adapted_info_active_count",
@@ -96,15 +104,7 @@ const struct SysfsCollector::SysfsPaths sysfs_paths = {
 const struct UeventListener::UeventPaths ueventPaths = {
         .AudioUevent = "/devices/virtual/amcs/amcs",
         .TypeCPartnerUevent = "PRODUCT_TYPE=",
-        .FGLearningPath = {
-            "/sys/class/power_supply/max77779fg/fg_learning_events",
-            "/sys/class/power_supply/maxfg_base/fg_learning_events"
-        },
         .FwUpdatePath = "/sys/devices/platform/maxim,max77779fwu/update_stats",
-        .FGModelLoadingPath = {
-            "/sys/class/power_supply/max77779fg/model_state",
-            "/sys/class/power_supply/maxfg_base/model_state"
-        },
 	.FGAbnlPath = "/sys/class/power_supply/max77779fg/fg_abnormal_events"
  };
 
