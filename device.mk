@@ -1204,3 +1204,9 @@ PRODUCT_CHECK_DEV_TYPE_VIOLATIONS := true
 # TODO(b/322518837): Remove the property override once the flag is launched.
 PRODUCT_PROPERTY_OVERRIDES += \
     debug.bugle.enable_emergency_satellite_messaging=true
+
+# Allow longer timeout for incident report generation in bugreport
+# Overriding in /product partition instead of /vendor intentionally,
+# since it can't be overridden from /vendor.
+PRODUCT_PRODUCT_PROPERTIES += \
+	dumpstate.strict_run=false
