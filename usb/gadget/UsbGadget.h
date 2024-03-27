@@ -80,7 +80,7 @@ static MonitorFfs monitorFfs(kGadgetName);
 
 #define SPEED_PATH UDC_PATH "current_speed"
 
-#define BIG_CORE "8"
+#define BIG_CORE "7"
 #define MEDIUM_CORE "4"
 
 #define POWER_SUPPLY_PATH	"/sys/class/power_supply/usb/"
