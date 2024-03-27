@@ -827,6 +827,13 @@ void dumpIrqDurationCounts() {
                     "s2mpg15-odpm/iio:device0/lpf_current",
     };
 
+    const char *lpfCurrentDirsAlt[] = {
+            "/sys/devices/platform/acpm_mfd_bus@15500000/i2c-7/7-001f/s2mpg14-meter/"
+                    "s2mpg14-odpm/iio:device0/lpf_current",
+            "/sys/devices/platform/acpm_mfd_bus@15510000/i2c-8/8-002f/s2mpg15-meter/"
+                    "s2mpg15-odpm/iio:device1/lpf_current",
+    };
+
     bool titlesInitialized = false;
 
     std::vector<std::string> channelNames;
@@ -889,7 +896,9 @@ void dumpIrqDurationCounts() {
     }
 
     for (int i = 0; i < PWRWARN_MAX; i++) {
-        if (!android::base::ReadFileToString(lpfCurrentDirs[i], &content)) {
+        if (!android::base::ReadFileToString(lpfCurrentDirs[i], &content) &&
+            !android::base::ReadFileToString(lpfCurrentDirsAlt[i], &content)) {
+            printf("Cannot find %s\n", lpfCurrentDirs[i]);
             continue;
         }
 
@@ -927,8 +936,27 @@ void dumpIrqDurationCounts() {
             }
             channelNameSuffix = "";
 
+            if (pmicSel >= PWRWARN_MAX) {
+                printf("invalid index: pmicSel >= pwrwarnCode size\n");
+                return;
+            }
+
+            if (i - offset >= pwrwarnCode[pmicSel].size()) {
+                printf("invalid index: i - offset >= pwrwarnCode size\n");
+                return;
+            }
             code = pwrwarnCode[pmicSel][i - offset];
+
+            if (i - offset >= pwrwarnThreshold[pmicSel].size()) {
+                printf("invalid index: i - offset >= pwrwarnThreshold size\n");
+                return;
+            }
             threshold = pwrwarnThreshold[pmicSel][i - offset];
+
+            if (i - offset >= lpfCurrentVals[pmicSel].size()) {
+                printf("invalid index: i - offset >= lpfCurrentVals size\n");
+                return;
+            }
             current = lpfCurrentVals[pmicSel][i - offset];
         }
 
