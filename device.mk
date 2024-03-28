@@ -42,7 +42,6 @@ include device/google/gs-common/misc_writer/misc_writer.mk
 include device/google/gs-common/gyotaku_app/gyotaku.mk
 include device/google/gs-common/bootctrl/bootctrl_aidl.mk
 include device/google/gs-common/betterbug/betterbug.mk
-include device/google/gs-common/pixelsupport/pixelsupport.mk
 
 include device/google/zumapro/dumpstate/item.mk
 
