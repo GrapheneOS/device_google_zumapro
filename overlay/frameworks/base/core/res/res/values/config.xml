@@ -227,12 +227,12 @@
     <!-- An array of device capabilities defined by GSMA SGP.22 v2.2.2, and their corresponding major
      version. -->
      <string-array translatable="false" name="config_telephonyEuiccDeviceCapabilities">
-          <item>"gsm,8"</item>
+          <item>"gsm,9"</item>
           <item>"utran,9"</item>
-          <item>"eutran,15"</item>
-          <item>"nrepc,15"</item>
-          <item>"nr5gc,15"</item>
-          <item>"eutran5gc,15"</item>
+          <item>"eutran,16"</item>
+          <item>"nrepc,16"</item>
+          <item>"nr5gc,16"</item>
+          <item>"eutran5gc,16"</item>
      </string-array>
 
     <!-- Auto-brightness sensor type string -->
