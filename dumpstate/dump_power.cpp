@@ -475,6 +475,11 @@ void dumpChgUserDebug() {
     const std::string debugfs = "/d/";
     const char *maxFgDir = "/d/maxfg";
     const char *maxFgStrMatch = "maxfg";
+    const char *maxBaseFgDir = "/d/maxfg_base";
+    const char *maxBaseFgStrMatch = "maxfg_base";
+    const char *maxSecFgDir = "/d/maxfg_secondary";
+    const char *maxSecFgStrMatch = "maxfg_secondary";
+    const char *max77779FgDir = "/d/max77779fg";
     const char *maxFg77779StrMatch = "max77779fg";
     const char *chgTblName = "Charging table dump";
     const char *chgTblDir = "/d/google_battery/chg_raw_profile";
@@ -495,6 +500,11 @@ void dumpChgUserDebug() {
             "debug_registers",
     };
 
+    const char *max1720xFgInfo [] {
+            "registers",
+            "nv_registers",
+    };
+
     if (isUserBuild())
         return;
 
@@ -504,9 +514,18 @@ void dumpChgUserDebug() {
         for (auto & directory : maxFgInfo) {
             printValuesOfDirectory(directory, debugfs, maxFgStrMatch);
         }
-    } else {
+    } else if (isValidDir(max77779FgDir)) {
         for (auto & directory : max77779FgInfo) {
             printValuesOfDirectory(directory, debugfs, maxFg77779StrMatch);
+        }
+    } else if (isValidDir(maxBaseFgDir)) {
+        for (auto & directory : max77779FgInfo) {
+            printValuesOfDirectory(directory, debugfs, maxBaseFgStrMatch);
+        }
+        if (isValidDir(maxSecFgDir)) {
+            for (auto & directory : max1720xFgInfo) {
+                printValuesOfDirectory(directory, debugfs, maxSecFgStrMatch);
+            }
         }
     }
 }

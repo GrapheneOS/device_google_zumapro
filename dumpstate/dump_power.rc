@@ -11,6 +11,9 @@ on init
     chown system system /dev/battery_history
     chmod 0644 /dev/battery_history
 
+    chown system system /dev/maxfg_history
+    chmod 0644 /dev/maxfg_history
+
     # Charge stats (write 0)
     chown system system /sys/class/power_supply/battery/charge_stats
 
