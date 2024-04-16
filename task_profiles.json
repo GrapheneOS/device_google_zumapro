@@ -1,6 +1,19 @@
 {
   "Profiles": [
     {
+      "Name": "ProcessCapacityNormal",
+      "Actions": [
+        {
+          "Name": "JoinCgroup",
+          "Params":
+          {
+            "Controller": "cpuset",
+            "Path": "system"
+          }
+        }
+      ]
+    },
+    {
       "Name": "MaxPerformance",
       "Actions": [
         {

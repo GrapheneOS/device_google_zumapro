@@ -299,7 +299,8 @@ void dumpTcpc() {
 
 void dumpPdEngine() {
     const char* pdEngine [][2] {
-            {"PD Engine logbuffer", "/dev/logbuffer_usbpd"},
+            {"TCPC logbuffer", "/dev/logbuffer_usbpd"},
+            {"pogo_transport logbuffer", "/dev/logbuffer_pogo_transport"},
             {"PPS-google_cpm logbuffer", "/dev/logbuffer_cpm"},
     };
     const char* ppsDcMsg = "PPS-dc logbuffer";
