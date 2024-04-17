@@ -1,16 +1,4 @@
 on init
-    # Move cpuset root group to system group
-    mkdir /dev/cpuset/system
-    copy /dev/cpuset/cpus /dev/cpuset/system/cpus
-    copy /dev/cpuset/mems /dev/cpuset/system/mems
-    chown system system /dev/cpuset/system
-    chown system system /dev/cpuset/system/tasks
-    chown system system /dev/cpuset/system/cgroup.procs
-    chmod 0664 /dev/cpuset/system/tasks
-    chmod 0664 /dev/cpuset/system/cgroup.procs
-
-    copy_per_line /dev/cpuset/tasks /dev/cpuset/system/tasks
-
     chown system system /sys/devices/system/cpu/cpufreq/policy0/sched_pixel/lcpi_threshold
     chown system system /sys/devices/system/cpu/cpufreq/policy0/sched_pixel/spc_threshold
     chown system system /sys/devices/system/cpu/cpufreq/policy0/sched_pixel/limit_frequency
@@ -162,9 +150,6 @@ on property:init.svc.vendor.charger=running
     write /sys/devices/system/cpu/cpu6/online 0
 
 on property:sys.boot_completed=1
-    # Move remaining tasks
-    copy_per_line /dev/cpuset/tasks /dev/cpuset/system/tasks
-
     # Set kswapd affinity
     write /sys/kernel/vendor_mm/kswapd_cpu_affinity 7f
 
