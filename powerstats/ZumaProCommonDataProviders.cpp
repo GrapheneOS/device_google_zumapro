@@ -636,11 +636,18 @@ void addTPU(std::shared_ptr<PowerStats> p) {
  * that live in user space. Entities are defined here and user space clients of this provider's
  * vendor service register callbacks to provide state residency data for their given pwoer entity.
  */
-void addPixelStateResidencyDataProvider(std::shared_ptr<PowerStats> p) {
+void addPixelStateResidencyDataProvider(std::shared_ptr<PowerStats> p, std::string displayName) {
 
     auto pixelSdp = std::make_unique<PixelStateResidencyDataProvider>();
 
+    // Bluetooth power stats are provided by BT HAL callback
     pixelSdp->addEntity("Bluetooth", {{0, "Idle"}, {1, "Active"}, {2, "Tx"}, {3, "Rx"}});
+
+    // Display VRR power stats are provided by HWC callback. If display entity
+    // name is empty, the device doesn't support VRR power stats.
+    if (!displayName.empty()) {
+        pixelSdp->addEntity(displayName, {});
+    }
 
     pixelSdp->start();
 
@@ -656,18 +663,10 @@ void addDisplayMrr(std::shared_ptr<PowerStats> p) {
     addDisplayMrrByEntity(p, "Display", "/sys/class/drm/card0/device/primary-panel/");
 }
 
-void addDisplayVrr(std::shared_ptr<PowerStats> p, std::string name) {
-    auto provider = std::make_unique<PixelStateResidencyDataProvider>();
-    provider->addEntity(name, {});
-    provider->start();
-    p->addStateResidencyDataProvider(std::move(provider));
-}
-
 void addZumaProCommonDataProviders(std::shared_ptr<PowerStats> p) {
     setEnergyMeter(p);
 
     addAoC(p);
-    addPixelStateResidencyDataProvider(p);
     addCPUclusters(p);
     addSoC(p);
     addGNSS(p);
