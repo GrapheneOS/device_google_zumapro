@@ -64,6 +64,14 @@ const struct SysfsCollector::SysfsPaths sysfs_paths = {
     .LongIRQMetricsPath = "/sys/kernel/metrics/irq/long_irq_metrics",
     .StormIRQMetricsPath = "/sys/kernel/metrics/irq/storm_irq_metrics",
     .IRQStatsResetPath = "/sys/kernel/metrics/irq/stats_reset",
+    .ThermalStatsPaths = {
+        "/sys/devices/platform/100a0000.BIG/trip_counter",
+        "/sys/devices/platform/100a0000.MID/trip_counter",
+        "/sys/devices/platform/100a0000.LITTLE/trip_counter",
+        "/sys/devices/platform/100b0000.G3D/trip_counter",
+        "/sys/devices/platform/100b0000.TPU/trip_counter",
+        "/sys/devices/platform/100b0000.AUR/trip_counter",
+    },
     .TempResidencyAndResetPaths = {
         {
             "/sys/kernel/metrics/thermal/tr_by_group/tmu/stats",
