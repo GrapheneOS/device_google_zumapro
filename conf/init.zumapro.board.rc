@@ -84,12 +84,6 @@ on init
     write /sys/block/zram0/comp_algorithm lz77eh
     write /proc/sys/vm/page-cluster 0
 
-    # adjust PCP high level
-    write /proc/sys/vm/percpu_pagelist_high_fraction 430
-
-    # disable proactive compaction
-    write /proc/sys/vm/compaction_proactiveness 0
-
     # Some user code relies on ro.boot.hardware.revision
     setprop ro.boot.hardware.revision ${ro.revision}
 
@@ -527,6 +521,12 @@ on property:sys.boot_completed=1
 
     # Cancel boot devfreq
     write /sys/devices/platform/17000010.devfreq_mif/devfreq/17000010.devfreq_mif/exynos_data/cancel_boot_freq 1
+
+    # Setup scheduler parameters
+    write /proc/vendor_sched/min_granularity_ns 1000000
+    write /proc/vendor_sched/latency_ns 8000000
+    write /proc/vendor_sched/max_load_balance_interval 4
+    write /proc/vendor_sched/enable_hrtick 1
 
     # Setup final cpu.uclamp
     write /proc/vendor_sched/groups/ta/uclamp_min 1
