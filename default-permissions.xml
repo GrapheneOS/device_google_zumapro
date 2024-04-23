@@ -65,6 +65,10 @@
         <permission name="android.permission.BLUETOOTH_SCAN" fixed="false"/>
     </exception>
 
+    <exception package="com.google.android.apps.pixel.creativeassistant">
+        <permission name="android.permission.POST_NOTIFICATIONS" fixed="false"/>
+    </exception>
+
     <exception package="com.google.android.apps.cbrsnetworkmonitor">
         <!-- Location access to create CBRS geofences-->
         <permission name="android.permission.ACCESS_FINE_LOCATION" fixed="true"/>

@@ -657,16 +657,20 @@ on post-fs-data
     symlink /mnt/vendor/persist/ss /data/vendor/ss/persist
     chown root system /data/vendor/ss/persist
     chmod 0770 /data/vendor/ss/persist
-    symlink /dev/block/platform/13200000\.ufs/by-name/trusty_persist /data/vendor/ss/persist/0
-    symlink /dev/block/platform/13200000\.ufs/by-name/trusty_userdata /data/vendor/ss/0
     chown system system /data/vendor/ss/0
     chown system system /data/vendor/ss/persist/0
     chown system system /data/vendor/ss/persist/nsp
 
     restart storageproxyd
 
-service storageproxyd /vendor/bin/storageproxyd -d /dev/trusty-ipc-dev0 \
-        -r /dev/sg1 -p /data/vendor/ss -t ufs
+service storageproxyd /vendor/bin/storageproxyd \
+	-d /dev/trusty-ipc-dev0 \
+	-r /dev/sg1 \
+	-p /data/vendor/ss \
+	-t ufs \
+	-f 0:/dev/block/platform/13200000\.ufs/by-name/trusty_userdata \
+	-f persist/0:/dev/block/platform/13200000\.ufs/by-name/trusty_persist \
+	-m /dev/block/platform/13200000\.ufs/by-name/trusty_userdata
     class early_hal
     user system
     group system
