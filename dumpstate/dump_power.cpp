@@ -327,6 +327,7 @@ void dumpBatteryHealth() {
             {"TTF stats", "/sys/class/power_supply/battery/ttf_stats"},
             {"aacr_state", "/sys/class/power_supply/battery/aacr_state"},
             {"pairing_state", "/sys/class/power_supply/battery/pairing_state"},
+            {"fwupdate", "/dev/logbuffer_max77779_fwupdate"}
     };
 
     const char* maxqName = "maxq logbuffer";

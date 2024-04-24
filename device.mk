@@ -180,7 +180,6 @@ PRODUCT_PRODUCT_PROPERTIES += \
 	bluetooth.profile.asha.central.enabled=true \
 	bluetooth.profile.a2dp.source.enabled=true \
 	bluetooth.profile.avrcp.target.enabled=true \
-	bluetooth.profile.bap.broadcast.assist.enabled=true \
 	bluetooth.profile.bap.unicast.server.enabled=true \
 	bluetooth.profile.bas.client.enabled=true \
 	bluetooth.profile.csip.set_coordinator.enabled=true \
@@ -810,6 +809,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Create input surface on the framework side
 PRODUCT_PROPERTY_OVERRIDES += \
 	debug.stagefright.c2inputsurface=-1 \
+
+PRODUCT_PROPERTY_OVERRIDES += media.c2.hal.selection=aidl
 
 # 2. OpenMAX IL
 PRODUCT_COPY_FILES += \

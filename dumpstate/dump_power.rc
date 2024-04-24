@@ -109,6 +109,7 @@ on early-boot
     chown system system /dev/logbuffer_ln8411
     chown system system /dev/logbuffer_cpm
     chown system system /dev/logbuffer_wc68
+    chown system system /dev/logbuffer_max77779_fwupdate
 
 on property:sys.boot_completed=1
     # gvotables for dumpstate
