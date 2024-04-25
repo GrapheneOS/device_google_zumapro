@@ -704,29 +704,6 @@ on post-fs-data
     chown system system /sys/kernel/metrics/thermal/tr_by_group/tmu/stats_reset
     chown system system /sys/kernel/metrics/thermal/tr_by_group/spmic/stats_reset
 
-on property:vendor.all.modules.ready=1
-    # BCL
-    write /sys/devices/platform/cpupm/cpupm/cpd_cl1 0 #Disable power down
-    write /sys/devices/platform/cpupm/cpupm/cpd_cl2 0 #Disable power down
-    write /sys/devices/virtual/pmic/mitigation/clock_ratio/tpu_light_clk_ratio 0xfff041c1 #OCP
-    write /sys/devices/virtual/pmic/mitigation/clock_ratio/cpu1_heavy_clk_ratio 0xfff041c0 #DFS
-    write /sys/devices/virtual/pmic/mitigation/clock_ratio/cpu2_heavy_clk_ratio 0xfff041c0 #DFS
-    write /sys/devices/virtual/pmic/mitigation/clock_ratio/gpu_light_clk_ratio 0xfff041c1 #OCP
-    write /sys/devices/virtual/pmic/mitigation/clock_ratio/cpu2_light_clk_ratio 0xfff041c3 #OCP
-    write /sys/devices/virtual/pmic/mitigation/clock_ratio/gpu_heavy_clk_ratio 0xfff04381 #DFS
-    write /sys/devices/virtual/pmic/mitigation/clock_ratio/tpu_heavy_clk_ratio 0xfff041c1 #DFS
-    write /sys/devices/virtual/pmic/mitigation/triggered_lvl/smpl_lvl 3000
-    write /sys/devices/virtual/pmic/mitigation/triggered_lvl/soft_ocp_cpu2_lvl 12000
-    write /sys/devices/virtual/pmic/mitigation/triggered_lvl/soft_ocp_gpu_lvl 9000
-    write /sys/devices/virtual/pmic/mitigation/triggered_lvl/soft_ocp_tpu_lvl 8500
-    write /sys/devices/virtual/pmic/mitigation/triggered_lvl/ocp_tpu_lvl 13500
-    write /sys/devices/virtual/pmic/mitigation/triggered_lvl/ocp_gpu_lvl 9000
-    write /sys/devices/virtual/pmic/mitigation/clock_div/tpu_clk_div 0x1
-    write /sys/devices/virtual/pmic/mitigation/clock_div/gpu_clk_div 0x1
-    write /sys/devices/virtual/pmic/mitigation/clock_div/cpu2_clk_div 0x1
-    write /sys/devices/platform/cpupm/cpupm/cpd_cl1 1 #Enable power down
-    write /sys/devices/platform/cpupm/cpupm/cpd_cl2 1 #Enable power down
-
 on property:vendor.thermal.link_ready=1
     chown system system /dev/thermal/tz-by-name/soc/mode
     chown system system /dev/thermal/tz-by-name/vdroop2/trip_point_0_temp
