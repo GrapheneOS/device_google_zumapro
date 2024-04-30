@@ -67,6 +67,9 @@
 
     <exception package="com.google.android.apps.pixel.creativeassistant">
         <permission name="android.permission.POST_NOTIFICATIONS" fixed="false"/>
+        <permission name="android.permission.READ_MEDIA_IMAGES" fixed="false"/>
+        <permission name="android.permission.READ_EXTERNAL_STORAGE" fixed="false"/>
+        <permission name="android.permission.WRITE_EXTERNAL_STORAGE" fixed="false"/>
     </exception>
 
     <exception package="com.google.android.apps.cbrsnetworkmonitor">
