@@ -88,13 +88,15 @@ const struct SysfsCollector::SysfsPaths sysfs_paths = {
         "/sys/class/power_supply/max77779fg/gmsr",
         "/sys/class/power_supply/maxfg_base/gmsr",
     },
-    .FGLearningPath = {
-        "/sys/class/power_supply/max77779fg/fg_learning_events",
-        "/sys/class/power_supply/maxfg_base/fg_learning_events"
-    },
     .FGModelLoadingPath = {
         "/sys/class/power_supply/max77779fg/model_state",
         "/sys/class/power_supply/maxfg_base/model_state"
+    },
+    .FGLogBufferPath = {
+        "/dev/logbuffer_maxfg_monitor",
+        "/dev/logbuffer_max77779fg_monitor",
+        "/dev/logbuffer_maxfg_base_monitor",
+        "/dev/logbuffer_maxfg_secondary_monitor"
     },
     .PDMStatePath = "/sys/devices/platform/audiometrics/pdm_state",
     .WavesPath = "/sys/devices/platform/audiometrics/waves",
@@ -106,7 +108,7 @@ const struct SysfsCollector::SysfsPaths sysfs_paths = {
     .TotalCallCountPath = "/sys/devices/platform/audiometrics/call_count",
     .OffloadEffectsIdPath = "/sys/devices/platform/audiometrics/offload_effects_id",
     .OffloadEffectsDurationPath = "/sys/devices/platform/audiometrics/offload_effects_duration",
-    .BluetoothAudioUsagePath = "/sys/devices/platform/audiometrics/bt_usage"
+    .BluetoothAudioUsagePath = "/sys/devices/platform/audiometrics/bt_usage",
 };
 
 const struct UeventListener::UeventPaths ueventPaths = {

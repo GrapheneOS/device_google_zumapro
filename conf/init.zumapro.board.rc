@@ -768,6 +768,9 @@ on property:vendor.thermal.link_ready=1
     chown system system /dev/thermal/cdev-by-name/wlc_fcc/cur_state
     chown system system /dev/thermal/cdev-by-name/chg_mdis/cur_state
     chown system system /dev/thermal/cdev-by-name/usbc-port/cur_state
+    chown system system /dev/thermal/cdev-by-name/thermal-uclamp-0/cur_state
+    chown system system /dev/thermal/cdev-by-name/thermal-uclamp-4/cur_state
+    chown system system /dev/thermal/cdev-by-name/thermal-uclamp-7/cur_state
 
 on charger
     # Use charger thermal config
