@@ -475,6 +475,24 @@ void addPCIe(std::shared_ptr<PowerStats> p) {
 
     p->addStateResidencyDataProvider(std::make_unique<GenericStateResidencyDataProvider>(
             "/sys/devices/platform/13120000.pcie/power_stats", pcieWifiCfgs));
+
+    // Add PCIe Modem GEN
+    const GenericStateResidencyDataProvider::StateResidencyConfig modemGenStateConfig = {
+        .entryCountSupported = true,
+        .entryCountPrefix = "count:",
+        .totalTimeSupported = true,
+        .totalTimePrefix = "duration msec:",
+    };
+    const std::vector<std::pair<std::string, std::string>> modemGenStateHeaders = {
+        std::make_pair("GEN1", "Gen1:"),
+        std::make_pair("GEN3", "Gen3:"),
+    };
+    const std::vector<GenericStateResidencyDataProvider::PowerEntityConfig> modemGenCfgs = {
+        {generateGenericStateResidencyConfigs(modemGenStateConfig, modemGenStateHeaders),
+            "PCIe-Modem-GEN", "link_speed:"}
+    };
+    p->addStateResidencyDataProvider(std::make_unique<GenericStateResidencyDataProvider>(
+            "/sys/devices/platform/12100000.pcie/link_duration", modemGenCfgs));
 }
 
 void addWifi(std::shared_ptr<PowerStats> p) {
