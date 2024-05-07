@@ -422,6 +422,55 @@
           <item>2050</item>          <!-- 100000+  -->
      </array>
 
+    <!-- Array of screen brightness threshold values. This is used for determining hysteresis
+         constraint values by calculating the index to use for lookup and then setting the
+         constraint value to the corresponding value of the array. The new brightening hysteresis
+         constraint value is the n-th element of config_screenBrighteningThresholds, and the new
+         darkening hysteresis constraint value is the n-th element of
+         config_screenDarkeningThresholds.
+
+         Historically, it has been assumed that this will be an integer array with values in the
+         range of [0, 255]. However, it is now assumed to be a float array with values in the
+         range of [0, 1]. To accommodate both the possibilities, we internally check the scale on
+         which the thresholds are defined, and calibrate it accordingly.
+
+         The (zero-based) index is calculated as follows: (MAX is the largest index of the array)
+         condition                       calculated index
+         value < level[0]                0
+         level[n] <= value < level[n+1]  n+1
+         level[MAX] <= value             MAX+1 -->
+    <array name="config_screenThresholdLevels">
+        <item>0.5</item>
+        <item>0.6</item>
+        <item>0.9</item>
+    </array>
+
+    <!-- Array of hysteresis constraint values for brightening, represented as tenths of a
+         percent. The length of this array is assumed to be one greater than
+         config_screenThresholdLevels. The brightening threshold is calculated as
+         screenBrightness * (1.0f + CONSTRAINT_VALUE). When the new screen brightness is higher
+         than this threshold, it is applied. See the config_screenThresholdLevels description for
+         how the constraint value is chosen. -->
+    <integer-array name="config_screenBrighteningThresholds">
+        <item>100</item>
+        <item>100</item>
+        <item>40</item>
+        <item>10</item>
+    </integer-array>
+
+    <!-- Array of hysteresis constraint values for darkening, represented as tenths of a
+         percent. The length of this array is assumed to be one greater than
+         config_screenThresholdLevels. The darkening threshold is calculated as
+         screenBrightness * (1.0f - CONSTRAINT_VALUE). When the new screen brightness is lower than
+         this threshold, it is applied. See the config_screenThresholdLevels description for how
+         the constraint value is chosen. -->
+    <integer-array name="config_screenDarkeningThresholds">
+        <item>200</item>
+        <item>200</item>
+        <item>200</item>
+        <item>200</item>
+    </integer-array>
+
     <!-- The identifier of the satellite's SIM profile. The identifier is composed of MCC and MNC
          of the satellite PLMN with the format "mccmnc". -->
     <string name="config_satellite_sim_plmn_identifier">90198</string>

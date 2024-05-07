@@ -245,6 +245,7 @@ ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
 $(call soong_config_set,aoc_audio_func,dump_usecase_data,true)
 $(call soong_config_set,aoc_audio_func,hal_socket_control,true)
 $(call soong_config_set,aoc_audio_func,record_tuning_keys,true)
+$(call soong_config_set,aoc_audio_func,aidl_command_interface,true)
 endif
 
 ifneq (,$(filter aosp_%,$(TARGET_PRODUCT)))
