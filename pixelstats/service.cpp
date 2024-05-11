@@ -109,6 +109,28 @@ const struct SysfsCollector::SysfsPaths sysfs_paths = {
     .OffloadEffectsIdPath = "/sys/devices/platform/audiometrics/offload_effects_id",
     .OffloadEffectsDurationPath = "/sys/devices/platform/audiometrics/offload_effects_duration",
     .BluetoothAudioUsagePath = "/sys/devices/platform/audiometrics/bt_usage",
+    .DisplayPortStatsPaths = {
+        "/sys/devices/platform/exynos-drm/displayport/drm-displayport-stats/link_negotiation_failures",
+        "/sys/devices/platform/exynos-drm/displayport/drm-displayport-stats/edid_read_failures",
+        "/sys/devices/platform/exynos-drm/displayport/drm-displayport-stats/dpcd_read_failures",
+        "/sys/devices/platform/exynos-drm/displayport/drm-displayport-stats/edid_invalid_failures",
+        "/sys/devices/platform/exynos-drm/displayport/drm-displayport-stats/sink_count_invalid_failures",
+        "/sys/devices/platform/exynos-drm/displayport/drm-displayport-stats/link_unstable_failures",
+    },
+    .HDCPStatsPaths = {
+        "/sys/devices/platform/hdcp/hdcp2_success_count",
+        "/sys/devices/platform/hdcp/hdcp2_fallback_count",
+        "/sys/devices/platform/hdcp/hdcp2_fail_count",
+        "/sys/devices/platform/hdcp/hdcp1_success_count",
+        "/sys/devices/platform/hdcp/hdcp1_fail_count",
+        "/sys/devices/platform/hdcp/hdcp0_count",
+    },
+    .DisplayStatsPaths = {
+        "/sys/devices/platform/exynos-drm/primary-panel/error_count_te",
+        "/sys/devices/platform/exynos-drm/primary-panel/error_count_unknown",
+        "/sys/devices/platform/exynos-drm/secondary-panel/error_count_te",
+        "/sys/devices/platform/exynos-drm/secondary-panel/error_count_unknown",
+    }
 };
 
 const struct UeventListener::UeventPaths ueventPaths = {

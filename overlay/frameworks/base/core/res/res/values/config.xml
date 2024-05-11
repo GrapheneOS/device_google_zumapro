@@ -496,7 +496,13 @@
          will move to IDLE state. This timeout duration is used for satellite with NB IOT radio
          technologies.
          -->
-    <integer name="config_satellite_nb_iot_inactivity_timeout_millis">900000</integer>
+    <integer name="config_satellite_nb_iot_inactivity_timeout_millis">2147483647</integer>
+
+    <!-- The time duration in millis after which cellular scanning will be enabled and satellite
+         will move to IDLE state. This timeout duration is used for satellite with NB IOT radio
+         technologies in demo mode.
+         -->
+    <integer name="config_satellite_demo_mode_nb_iot_inactivity_timeout_millis">2147483647</integer>
 
     <!-- The time duration in millis after which Telephony will abort the datagram sending requests.
          Telephony starts a timer when receiving a datagram sending request in either OFF, IDLE, or
@@ -505,4 +511,10 @@
          config_satellite_modem_image_switching_duration_millis.
          -->
     <integer name="config_datagram_wait_for_connected_state_timeout_millis">180000</integer>
+
+    <!-- The package name of the app to handle oem-enabled satellite SOS messaging. -->
+    <string name="config_oem_enabled_satellite_sos_handover_app">com.google.android.apps.stargate;com.google.android.apps.stargate.questionnaire.QuestionnaireHomeActivity</string>
+
+    <!-- The intent action to handle oem-enabled satellite SOS messaging. -->
+    <string name="config_satellite_emergency_handover_intent_action">com.google.android.apps.stargate.ACTION_ESOS_QUESTIONNAIRE</string>
 </resources>
