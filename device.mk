@@ -1057,6 +1057,9 @@ $(call soong_config_set,aoc,target_product,$(TARGET_PRODUCT))
 #
 ## Audio properties
 PRODUCT_PROPERTY_OVERRIDES += \
+	persist.vendor.audio.cca.unsupported=false
+
+PRODUCT_PROPERTY_OVERRIDES += \
 	ro.config.vc_call_vol_steps=7 \
 	ro.config.media_vol_steps=25 \
 	ro.audio.monitorRotation = true \
