@@ -975,10 +975,6 @@ PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/handheld_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/handheld_core_hardware.xml \
 
 ifneq ($(BOARD_WITHOUT_RADIO),true)
-# Shared Modem Platform
-SHARED_MODEM_PLATFORM_VENDOR := lassen
-include device/google/gs-common/modem/shared_modem_platform/shared_modem_platform.mk
-
 # modem_ml_svc_sit daemon
 PRODUCT_PACKAGES += modem_ml_svc_sit
 
@@ -1228,3 +1224,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # since it can't be overridden from /vendor.
 PRODUCT_PRODUCT_PROPERTIES += \
 	dumpstate.strict_run=false
+
+# Shared Modem Platform
+SHARED_MODEM_PLATFORM_VENDOR := lassen
+include device/google/gs-common/modem/shared_modem_platform/shared_modem_platform.mk
