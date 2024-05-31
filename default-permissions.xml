@@ -86,6 +86,8 @@
         <permission name="android.permission.ACTIVITY_RECOGNITION" fixed="false"/>
         <!-- Used to display notifications for Spectrum Speedboost and Satellite eSOS -->
         <permission name="android.permission.POST_NOTIFICATIONS" fixed="false"/>
+        <!-- Used by Bluetooth Module to collect bluetooth info -->
+        <permission name="android.permission.BLUETOOTH_CONNECT" fixed="false"/>
     </exception>
 
     <exception

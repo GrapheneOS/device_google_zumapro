@@ -137,7 +137,10 @@ const struct UeventListener::UeventPaths ueventPaths = {
         .AudioUevent = "/devices/virtual/amcs/amcs",
         .TypeCPartnerUevent = "PRODUCT_TYPE=",
         .FwUpdatePath = "/sys/devices/platform/maxim,max77779fwu/update_stats",
-	.FGAbnlPath = "/sys/class/power_supply/max77779fg/fg_abnormal_events"
+        .FGAbnlPath = {
+            "/dev/logbuffer_max77779fg_monitor",
+            "/dev/logbuffer_maxfg_base_monitor",
+        }
  };
 
 int main() {

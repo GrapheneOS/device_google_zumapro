@@ -23,10 +23,12 @@
 #include <assert.h>
 #include <cstring>
 #include <dirent.h>
+#include <private/android_filesystem_config.h>
 #include <pthread.h>
 #include <stdio.h>
 #include <sys/types.h>
 #include <unistd.h>
+#include <usbhost/usbhost.h>
 #include <regex>
 #include <thread>
 #include <unordered_map>
@@ -37,6 +39,7 @@
 #include <sys/timerfd.h>
 #include <utils/Errors.h>
 #include <utils/StrongPointer.h>
+#include <utils/Vector.h>
 
 #include "Usb.h"
 
@@ -58,6 +61,8 @@ using android::hardware::google::pixel::getStatsService;
 using android::hardware::google::pixel::PixelAtoms::VendorUsbPortOverheat;
 using android::hardware::google::pixel::reportUsbPortOverheat;
 using android::hardware::google::pixel::usb::getI2cClientPath;
+using android::String8;
+using android::Vector;
 
 namespace aidl {
 namespace android {
@@ -115,6 +120,15 @@ void queryVersionHelper(android::hardware::usb::Usb *usb,
                         std::vector<PortStatus> *currentPortStatus);
 AltModeData::DisplayPortAltModeData constructAltModeData(string hpd, string pin_assignment,
                                                          string link_status, string vdo);
+
+#define CTRL_TRANSFER_TIMEOUT_MSEC 1000
+#define GL852G_VENDOR_ID 0x05e3
+#define GL852G_PRODUCT_ID1 0x0608
+#define GL852G_PRODUCT_ID2 0x0610
+#define GL852G_VENDOR_CMD_REQ 0xe3
+// GL852G port 1 and port 2 JK level default settings
+#define GL852G_VENDOR_CMD_VALUE_DEFAULT 0x0008
+#define GL852G_VENDOR_CMD_INDEX_DEFAULT 0x0404
 
 ScopedAStatus Usb::enableUsbData(const string& in_portName, bool in_enable,
         int64_t in_transactionId) {
@@ -510,6 +524,61 @@ void updatePortStatus(android::hardware::usb::Usb *usb) {
     queryVersionHelper(usb, &currentPortStatus);
 }
 
+static int usbDeviceRemoved(const char *devname, void* client_data) {
+    return 0;
+}
+
+static int usbDeviceAdded(const char *devname, void* client_data) {
+    uint16_t vendorId, productId;
+    struct usb_device *device;
+    ::aidl::android::hardware::usb::Usb *usb;
+    int value, index;
+
+    device = usb_device_open(devname);
+    if (!device) {
+        ALOGE("usb_device_open failed\n");
+        return 0;
+    }
+
+    usb = (::aidl::android::hardware::usb::Usb *)client_data;
+    value = usb->mUsbHubVendorCmdValue;
+    index = usb->mUsbHubVendorCmdIndex;
+
+    // The vendor cmd only applies to USB Hubs of Genesys Logic, Inc.
+    // The request field of vendor cmd is fixed to 0xe3.
+    vendorId = usb_device_get_vendor_id(device);
+    productId = usb_device_get_product_id(device);
+    if (vendorId == GL852G_VENDOR_ID &&
+        (productId == GL852G_PRODUCT_ID1 || productId == GL852G_PRODUCT_ID2)) {
+        int ret = usb_device_control_transfer(device,
+            USB_DIR_OUT | USB_TYPE_VENDOR, GL852G_VENDOR_CMD_REQ, value, index,
+            NULL, 0, CTRL_TRANSFER_TIMEOUT_MSEC);
+        ALOGI("USB hub vendor cmd %s (wValue 0x%x, wIndex 0x%x, return %d)\n",
+                ret? "failed" : "succeeded", value, index, ret);
+    }
+
+    usb_device_close(device);
+
+    return 0;
+}
+
+void *usbHostWork(void *param) {
+    struct usb_host_context *ctx;
+
+    ALOGI("creating USB host thread\n");
+
+    ctx = usb_host_init();
+    if (!ctx) {
+        ALOGE("usb_host_init failed\n");
+        return NULL;
+    }
+
+    // This will never return, it will keep monitoring USB sysfs inotify events
+    usb_host_run(ctx, usbDeviceAdded, usbDeviceRemoved, NULL, param);
+
+    return NULL;
+}
+
 Usb::Usb()
     : mLock(PTHREAD_MUTEX_INITIALIZER),
       mRoleSwitchLock(PTHREAD_MUTEX_INITIALIZER),
@@ -531,7 +600,9 @@ Usb::Usb()
       mDisplayPortPollRunning(false),
       mDisplayPortPollStarting(false),
       mDisplayPortCVLock(PTHREAD_MUTEX_INITIALIZER),
-      mDisplayPortLock(PTHREAD_MUTEX_INITIALIZER) {
+      mDisplayPortLock(PTHREAD_MUTEX_INITIALIZER),
+      mUsbHubVendorCmdValue(GL852G_VENDOR_CMD_VALUE_DEFAULT),
+      mUsbHubVendorCmdIndex(GL852G_VENDOR_CMD_INDEX_DEFAULT) {
     pthread_condattr_t attr;
     if (pthread_condattr_init(&attr)) {
         ALOGE("pthread_condattr_init failed: %s", strerror(errno));
@@ -566,6 +637,10 @@ Usb::Usb()
     mDisplayPortActivateTimer = timerfd_create(CLOCK_MONOTONIC, TFD_NONBLOCK);
     if (mDisplayPortActivateTimer == -1) {
         ALOGE("mDisplayPortActivateTimer timerfd failed: %s", strerror(errno));
+        abort();
+    }
+    if (pthread_create(&mUsbHost, NULL, usbHostWork, this)) {
+        ALOGE("pthread creation failed %d\n", errno);
         abort();
     }
 
@@ -853,7 +928,7 @@ Status getPortStatusHelper(android::hardware::usb::Usb *usb,
 
             PortRole currentRole;
             currentRole.set<PortRole::powerRole>(PortPowerRole::NONE);
-            if (getCurrentRoleHelper(port.first, port.second, &currentRole) == Status::SUCCESS){
+            if (getCurrentRoleHelper(port.first, port.second, &currentRole) == Status::SUCCESS) {
                 (*currentPortStatus)[i].currentPowerRole = currentRole.get<PortRole::powerRole>();
             } else {
                 ALOGE("Error while retrieving portNames");
@@ -1937,6 +2012,47 @@ void Usb::shutdownDisplayPortPoll(bool force) {
     if (pthread_create(&mDisplayPortShutdownHelper, NULL, shutdownDisplayPortPollWork, this)) {
         ALOGE("usbdp: shutdown: shutdown worker pthread creation failed %d", errno);
     }
+}
+
+status_t Usb::handleShellCommand(int in, int out, int err, const char** argv,
+                                 uint32_t argc) {
+    uid_t uid = AIBinder_getCallingUid();
+    if (uid != AID_ROOT && uid != AID_SHELL) {
+        return ::android::PERMISSION_DENIED;
+    }
+
+    Vector<String8> utf8Args;
+    utf8Args.setCapacity(argc);
+    for (uint32_t i = 0; i < argc; i++) {
+        utf8Args.push(String8(argv[i]));
+    }
+
+    if (argc >= 1) {
+        if (!utf8Args[0].compare(String8("hub-vendor-cmd"))) {
+            if (utf8Args.size() < 3) {
+                dprintf(out, "Incorrect number of argument supplied\n");
+                return ::android::UNKNOWN_ERROR;
+            }
+            int value, index;
+            if (!::android::base::ParseInt(utf8Args[1].c_str(), &value) ||
+                !::android::base::ParseInt(utf8Args[2].c_str(), &index)) {
+                dprintf(out, "Fail to parse arguments\n");
+                return ::android::UNKNOWN_ERROR;
+            }
+            mUsbHubVendorCmdValue = value;
+            mUsbHubVendorCmdIndex = index;
+            ALOGI("USB hub vendor cmd update (wValue 0x%x, wIndex 0x%x)\n",
+                  mUsbHubVendorCmdValue, mUsbHubVendorCmdIndex);
+            return ::android::NO_ERROR;
+        }
+    }
+
+    dprintf(out, "usage: adb shell cmd hub-vendor-cmd VALUE INDEX\n"
+                 "  VALUE wValue field in hex format, e.g. 0xf321\n"
+                 "  INDEX wIndex field in hex format, e.g. 0xf321\n"
+                 "  The settings take effect next time the hub is enabled\n");
+
+    return ::android::NO_ERROR;
 }
 
 } // namespace usb
