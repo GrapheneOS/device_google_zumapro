@@ -128,7 +128,7 @@ AltModeData::DisplayPortAltModeData constructAltModeData(string hpd, string pin_
 #define GL852G_VENDOR_CMD_REQ 0xe3
 // GL852G port 1 and port 2 JK level default settings
 #define GL852G_VENDOR_CMD_VALUE_DEFAULT 0x0008
-#define GL852G_VENDOR_CMD_INDEX_DEFAULT 0x0404
+#define GL852G_VENDOR_CMD_INDEX_DEFAULT 0x0407
 
 ScopedAStatus Usb::enableUsbData(const string& in_portName, bool in_enable,
         int64_t in_transactionId) {
