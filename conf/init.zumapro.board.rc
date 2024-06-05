@@ -294,26 +294,6 @@ on post-fs-data
 # Video data
     mkdir /data/vendor/media 0700 mediacodec mediacodec
 
-on post-fs-data
-    # GPS
-    mkdir /data/vendor/gps 0771 system system
-    chown system system /data/vendor/gps
-    rm /data/vendor/gps/gps_started
-    rm /data/vendor/gps/glonass_started
-    rm /data/vendor/gps/beidou_started
-    rm /data/vendor/gps/smd_started
-    rm /data/vendor/gps/sv_cno.info
-
-    chown gps system /sys/devices/platform/111e0000.spi/spi_master/spi21/spi21.0/nstandby
-    chmod 0664 /dev/ttyBCM
-    chown gps system /dev/ttyBCM
-    chmod 0664 /dev/bbd_control
-    chown gps system /dev/bbd_control
-    chmod 0664 /dev/bbd_patch
-    chown gps system /dev/bbd_patch
-    chmod 0664 /dev/bbd_sensor
-    chown gps system /dev/bbd_sensor
-
 on early-boot
     # Wait for insmod_sh to finish all common modules
     wait_for_prop vendor.common.modules.ready 1
