@@ -979,6 +979,7 @@ ifneq ($(BOARD_WITHOUT_RADIO),true)
 # modem_ml_svc_sit daemon
 PRODUCT_PACKAGES += modem_ml_svc_sit
 
+ifeq (,$(filter aosp_%,$(TARGET_PRODUCT)))
 # Modem ML TFLite service.
 PRODUCT_PACKAGES += modemml-tflite-service \
 	libtensorflowlite_jni
@@ -992,6 +993,7 @@ PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST += \
 	system/lib64/libtensorflowlite_jni.so
 
 PRODUCT_SYSTEM_SERVER_JARS += modemml-tflite-service
+endif
 
 # modem ML models configs
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
