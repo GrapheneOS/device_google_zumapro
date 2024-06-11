@@ -852,8 +852,6 @@ PRODUCT_PACKAGES += wpa_supplicant.conf
 
 WIFI_PRIV_CMD_UPDATE_MBO_CELL_STATUS := enabled
 
-WIFI_BRCM_OPEN_SOURCE_MULTI_AKM := enabled
-
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_PACKAGES += wpa_cli
 PRODUCT_PACKAGES += hostapd_cli
