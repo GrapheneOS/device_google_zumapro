@@ -150,8 +150,6 @@ endif
 
 #display_unit_test
 ifeq ($(USES_DEVICE_GOOGLE_ZUMAPRO),true)
-# TODO(b/272725898): Needs to check with owner later
-$(warning display_unit_test set to zuma on zumapro target)
 $(call soong_config_set,display_unit_test,soc,zuma)
 endif
 
@@ -280,8 +278,6 @@ HWC_SUPPORT_COLOR_TRANSFORM := true
 BOARD_USES_EXYNOS_AFBC_FEATURE := true
 #BOARD_USES_HDRUI_GLES_CONVERSION := true
 
-# TODO(b/272725898): Needs to check with owner later
-$(warning BOARD_LIBACRYL_DEFAULT_COMPOSITOR set to zuma on zumapro target)
 BOARD_LIBACRYL_DEFAULT_COMPOSITOR := fimg2d_zuma
 BOARD_LIBACRYL_G2D_HDR_PLUGIN := libacryl_hdr_plugin
 

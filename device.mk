@@ -43,6 +43,7 @@ include device/google/gs-common/gyotaku_app/gyotaku.mk
 include device/google/gs-common/bootctrl/bootctrl_aidl.mk
 include device/google/gs-common/betterbug/betterbug.mk
 include device/google/gs-common/recorder/recorder.mk
+include device/google/gs-common/fingerprint/fingerprint.mk
 
 include device/google/zumapro/dumpstate/item.mk
 
@@ -67,8 +68,6 @@ ifeq ($(USE_PIXEL_GRALLOC),true)
 	PRODUCT_SOONG_NAMESPACES += hardware/google/gchips/GrallocHAL
 endif
 
-# TODO(b/272725898): Needs to check with owner later
-$(warning hardware/google/graphics/zuma set to zuma on zumapro target)
 PRODUCT_SOONG_NAMESPACES += \
 	hardware/google/av \
 	hardware/google/gchips \
@@ -935,8 +934,6 @@ PRODUCT_SOONG_NAMESPACES += \
 PRODUCT_PACKAGES += \
 	trusty_metricsd
 
-# TODO(b/272725898): Needs to check with owner later
-$(warning displaycolor_platform set to zuma on zumapro target)
 $(call soong_config_set,google_displaycolor,displaycolor_platform,zuma)
 PRODUCT_PACKAGES += \
 	android.hardware.composer.hwc3-service.pixel \
