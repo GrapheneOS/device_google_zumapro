@@ -130,7 +130,8 @@ const struct SysfsCollector::SysfsPaths sysfs_paths = {
         "/sys/devices/platform/exynos-drm/primary-panel/error_count_unknown",
         "/sys/devices/platform/exynos-drm/secondary-panel/error_count_te",
         "/sys/devices/platform/exynos-drm/secondary-panel/error_count_unknown",
-    }
+    },
+    .SpeakerVersionPath = "/sys/devices/platform/audiometrics/speaker_version"
 };
 
 const struct UeventListener::UeventPaths ueventPaths = {
