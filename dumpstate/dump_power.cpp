@@ -235,6 +235,21 @@ void dumpPowerSupplyDock() {
     }
 }
 
+void dumpSecondCharge() {
+    const char* powerSupplyPropertySecChgTitle = "Power supply property rt9471";
+    const char* powerSupplyPropertySecChgFile = "/sys/class/power_supply/rt9471/uevent";
+    const char *secChgTitle = "RT9470G";
+    const char *secChgFile = "/sys/devices/platform/10ca0000.hsi2c/i2c-10/10-005b/registers_dump";
+
+    if (isValidFile(powerSupplyPropertySecChgFile)) {
+        dumpFileContent(powerSupplyPropertySecChgTitle, powerSupplyPropertySecChgFile);
+    }
+
+    if (isValidFile(secChgFile)) {
+        dumpFileContent(secChgTitle, secChgFile);
+    }
+}
+
 void dumpLogBufferTcpm() {
     const char* logbufferTcpmTitle = "Logbuffer TCPM";
     const char* logbufferTcpmFile = "/dev/logbuffer_tcpm";
@@ -1069,6 +1084,7 @@ int main() {
     dumpPowerStatsTimes();
     dumpAcpmStats();
     dumpPowerSupplyStats();
+    dumpSecondCharge();
     dumpMaxFg();
     dumpPowerSupplyDock();
     dumpLogBufferTcpm();
