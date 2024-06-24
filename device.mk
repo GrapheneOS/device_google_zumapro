@@ -395,8 +395,6 @@ PRODUCT_VENDOR_PROPERTIES += \
 # GRAPHICS - GPU (end)
 # ####################
 
-PRODUCT_SHIPPING_API_LEVEL := $(SHIPPING_API_LEVEL)
-
 # Device Manifest, Device Compatibility Matrix for Treble
 DEVICE_MANIFEST_FILE := \
 	device/google/zumapro/manifest.xml
@@ -420,6 +418,8 @@ DEVICE_MATRIX_FILE := \
 	device/google/zumapro/compatibility_matrix.xml
 
 DEVICE_PACKAGE_OVERLAYS += device/google/zumapro/overlay
+
+PRODUCT_SHIPPING_API_LEVEL := 34
 
 # RKP VINTF
 -include vendor/google_nos/host/android/hals/keymaster/aidl/strongbox/RemotelyProvisionedComponent-citadel.mk
