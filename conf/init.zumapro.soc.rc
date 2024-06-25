@@ -28,17 +28,30 @@ on init
     write /proc/vendor_sched/groups/sys/uclamp_min 190
     write /proc/vendor_sched/groups/sys/prefer_idle 1
 
+    write /proc/vendor_sched/groups/bg/rampup_multiplier 0
+    write /proc/vendor_sched/groups/cam/rampup_multiplier 1
+    write /proc/vendor_sched/groups/cam_power/rampup_multiplier 1
+    write /proc/vendor_sched/groups/dex2oat/rampup_multiplier 0
+    write /proc/vendor_sched/groups/fg/rampup_multiplier 0
+    write /proc/vendor_sched/groups/nnapi/rampup_multiplier 0
+    write /proc/vendor_sched/groups/ota/rampup_multiplier 0
+    write /proc/vendor_sched/groups/rt/rampup_multiplier 0
+    write /proc/vendor_sched/groups/sf/rampup_multiplier 1
+    write /proc/vendor_sched/groups/sys/rampup_multiplier 0
+    write /proc/vendor_sched/groups/sys_bg/rampup_multiplier 0
+    write /proc/vendor_sched/groups/ta/rampup_multiplier 1
+    write /proc/vendor_sched/adpf_rampup_multiplier 2
+
     # governor setting
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor sched_pixel
     write /sys/devices/system/cpu/cpu0/cpufreq/sched_pixel/up_rate_limit_us 500
-    write /sys/devices/system/cpu/cpu0/cpufreq/sched_pixel/down_rate_limit_us 5000
-    write /sys/devices/system/cpu/cpu0/cpufreq/sched_pixel/down_rate_limit_scale_pow 2
+    write /sys/devices/system/cpu/cpu0/cpufreq/sched_pixel/down_rate_limit_us 500
     write /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor sched_pixel
     write /sys/devices/system/cpu/cpu4/cpufreq/sched_pixel/up_rate_limit_us 500
-    write /sys/devices/system/cpu/cpu4/cpufreq/sched_pixel/down_rate_limit_us 20000
+    write /sys/devices/system/cpu/cpu4/cpufreq/sched_pixel/down_rate_limit_us 500
     write /sys/devices/system/cpu/cpu7/cpufreq/scaling_governor sched_pixel
     write /sys/devices/system/cpu/cpu7/cpufreq/sched_pixel/up_rate_limit_us 500
-    write /sys/devices/system/cpu/cpu7/cpufreq/sched_pixel/down_rate_limit_us 20000
+    write /sys/devices/system/cpu/cpu7/cpufreq/sched_pixel/down_rate_limit_us 500
 
     # memlat cpuidle awareness setting
     # FIXME(b/301212469) these nodes missing on zuma pro
