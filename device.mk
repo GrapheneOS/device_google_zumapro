@@ -395,22 +395,9 @@ PRODUCT_VENDOR_PROPERTIES += \
 # GRAPHICS - GPU (end)
 # ####################
 
-PRODUCT_SHIPPING_API_LEVEL := $(SHIPPING_API_LEVEL)
-
 # Device Manifest, Device Compatibility Matrix for Treble
-#
-# Install product specific framework compatibility matrix
-# (TODO: b/169535506) This includes the FCM for system_ext and product partition.
-# It must be split into the FCM of each partition.
-ifeq ($(PRODUCT_SHIPPING_API_LEVEL),35)
-DEVICE_MANIFEST_FILE := \
-	device/google/zumapro/manifest_202404.xml
-DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += device/google/zumapro/device_framework_matrix_product_202404.xml
-else
 DEVICE_MANIFEST_FILE := \
 	device/google/zumapro/manifest.xml
-DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += device/google/zumapro/device_framework_matrix_product.xml
-endif
 
 ifneq (,$(filter aosp_%,$(TARGET_PRODUCT)))
 DEVICE_MANIFEST_FILE += \
@@ -431,6 +418,8 @@ DEVICE_MATRIX_FILE := \
 	device/google/zumapro/compatibility_matrix.xml
 
 DEVICE_PACKAGE_OVERLAYS += device/google/zumapro/overlay
+
+PRODUCT_SHIPPING_API_LEVEL := 34
 
 # RKP VINTF
 -include vendor/google_nos/host/android/hals/keymaster/aidl/strongbox/RemotelyProvisionedComponent-citadel.mk
@@ -1196,6 +1185,11 @@ include hardware/google/pixel/wifi_ext/device.mk
 
 # Battery Stats Viewer
 PRODUCT_PACKAGES_DEBUG += BatteryStatsViewer
+
+# Install product specific framework compatibility matrix
+# (TODO: b/169535506) This includes the FCM for system_ext and product partition.
+# It must be split into the FCM of each partition.
+DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += device/google/zumapro/device_framework_matrix_product.xml
 
 # Keymint configuration
 PRODUCT_COPY_FILES += \
