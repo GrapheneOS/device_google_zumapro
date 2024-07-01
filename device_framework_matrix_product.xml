@@ -185,4 +185,22 @@
             <instance>rilExternal</instance>
         </interface>
     </hal>
+    <hal format="aidl" optional="true">
+        <name>vendor.samsung_slsi.telephony.hardware.radioExternal</name>
+        <version>1</version>
+        <interface>
+            <name>IOemSlsiRadioExternal</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="aidl" optional="true">
+        <name>vendor.samsung_slsi.telephony.hardware.oemservice</name>
+        <version>1</version>
+        <interface>
+            <name>IOemService</name>
+            <instance>dm0</instance>
+            <instance>dm1</instance>
+            <instance>sced0</instance>
+        </interface>
+    </hal>
 </compatibility-matrix>
