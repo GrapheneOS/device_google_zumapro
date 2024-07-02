@@ -304,9 +304,10 @@
 
     <!-- Class names of device-specific services inheriting com.android.server.SystemService. The
          classes are instantiated in the order of the array. -->
-    <string-array translatable="false" name="config_deviceSpecificSystemServices">
+    <!-- TODO: b/350624523 - Add back modem ML TFLite service after it is ready. -->
+    <!-- <string-array translatable="false" name="config_deviceSpecificSystemServices">
         <item>com.android.server.modemml.TFLiteService</item>
-    </string-array>
+    </string-array> -->
 
     <!-- Pre-scale volume at volume step 1 for Absolute Volume -->
     <fraction name="config_prescaleAbsoluteVolume_index1">100%</fraction>
@@ -517,4 +518,10 @@
 
     <!-- The intent action to handle oem-enabled satellite SOS messaging. -->
     <string name="config_satellite_emergency_handover_intent_action">com.google.android.apps.stargate.ACTION_ESOS_QUESTIONNAIRE</string>
+
+    <!-- The class name to handle carrier roaming to satellite is using ESOS messaging. -->
+    <string name="config_satellite_carrier_roaming_esos_provisioned_class">com.google.android.apps.stargate</string>
+
+    <!-- The intent action to handle carrier roaming to satellite is using ESOS messaging. -->
+    <string name="config_satellite_carrier_roaming_esos_provisioned_intent_action">com.google.satellitegateway.ACTION_REGISTER</string>
 </resources>

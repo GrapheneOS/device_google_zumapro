@@ -228,21 +228,18 @@ $(call inherit-product-if-exists, vendor/samsung_slsi/telephony/$(BOARD_USES_SHA
 # modem_ml_svc_sit daemon
 PRODUCT_PACKAGES += modem_ml_svc_sit
 
-ifeq (,$(filter aosp_%,$(TARGET_PRODUCT)))
-# Modem ML TFLite service.
-PRODUCT_PACKAGES += modemml-tflite-service \
-	libtensorflowlite_jni
+# TODO: b/350624523 - Add back modem ML TFLite service after it is ready.
+# ifeq (,$(filter aosp_%,$(TARGET_PRODUCT)))
+# # Modem ML TFLite service.
+# PRODUCT_PACKAGES += modemml-tflite-service \
+# 	libtensorflowlite_jni
 
-# Allow TFLite service modules to be installed to the system partition
-PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST += \
-	system/etc/vintf/manifest/modemml_tflite_service.xml \
-	system/framework/modemml-tflite-service.jar \
-	system/framework/oat/arm64/modemml-tflite-service.odex \
-	system/framework/oat/arm64/modemml-tflite-service.vdex \
-	system/lib64/libtensorflowlite_jni.so
+# # Allow TFLite service modules to be installed to the system partition
+# PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST += \
+# 	system/lib64/libtensorflowlite_jni.so
 
-PRODUCT_SYSTEM_SERVER_JARS += modemml-tflite-service
-endif
+# PRODUCT_SYSTEM_SERVER_JARS += system_ext:modemml-tflite-service
+# endif
 
 # modem ML models configs
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
