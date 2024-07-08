@@ -82,7 +82,6 @@ PRODUCT_SOONG_NAMESPACES += \
 	vendor/google_devices/common/chre/host/hal \
 	vendor/google/whitechapel/tools \
 	vendor/google/interfaces \
-	vendor/google_devices/common/proprietary/confirmatioui_hal \
 	vendor/google_nos/host/android \
 	vendor/google_nos/test/system-test-harness \
 	vendor/google/camera
@@ -922,9 +921,6 @@ PRODUCT_PACKAGES_DEBUG += \
     trusty-ut-ctrl \
     tipc-test \
     trusty_stats_test \
-
-# Remove confirmation UI (b/316160738)
-# include device/google/gs101/confirmationui/confirmationui.mk
 
 # Trusty Metrics Daemon
 PRODUCT_SOONG_NAMESPACES += \

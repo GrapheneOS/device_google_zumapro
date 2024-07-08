@@ -408,6 +408,7 @@ on fs
     chown system system /sys/devices/platform/exynos-drm/primary-panel/te2_rate_hz
     chown system system /sys/devices/platform/exynos-drm/primary-panel/te2_option
     chown system system /sys/devices/platform/exynos-drm/primary-panel/power_state
+    chown system system /sys/devices/platform/exynos-drm/primary-panel/frame_rate
     chown system system /sys/module/drm/parameters/vblankoffdelay
     chown system system /sys/module/drm/parameters/debug
     chown system system /sys/class/dqe0/atc/ambient_light
