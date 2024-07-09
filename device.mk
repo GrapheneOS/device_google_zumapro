@@ -333,8 +333,17 @@ PRODUCT_PACKAGES += \
 	csffw_image_prebuilt__firmware_prebuilt_ttux_mali_csffw.bin \
 	libGLES_mali \
 	vulkan.mali \
-	libOpenCL \
 	libgpudataproducer
+
+# Install the OpenCL ICD Loader
+PRODUCT_SOONG_NAMESPACES += external/OpenCL-ICD-Loader
+PRODUCT_PACKAGES += \
+	libOpenCL \
+	mali_icd__customer_pixel_opencl-icd_ARM.icd
+ifeq ($(DEVICE_IS_64BIT_ONLY),false)
+PRODUCT_PACKAGES += \
+	mali_icd__customer_pixel_opencl-icd_ARM32.icd
+endif
 
 ifeq ($(USE_SWIFTSHADER),true)
 $(warning USE_SWIFTSHADER set to current target)
