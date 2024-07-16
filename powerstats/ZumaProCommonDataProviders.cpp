@@ -196,7 +196,7 @@ void addDvfsStats(std::shared_ptr<PowerStats> p) {
             path, NS_TO_MS, cfgs));
 
     // TPU DVFS
-    const int TICK_TO_MS = 100;
+    const int TICK_TO_MS = 1000;
     std::vector<std::string> freqs = {
             "1119000",
             "1066000",
