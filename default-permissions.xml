@@ -68,6 +68,13 @@
         <permission name="android.permission.POST_NOTIFICATIONS" fixed="false"/>
     </exception>
 
+    <exception package="com.google.android.apps.pixel.relationships">
+        <!-- Contacts -->
+        <permission name="android.permission.READ_CALL_LOG" fixed="false"/>
+        <permission name="android.permission.READ_CONTACTS" fixed="false"/>
+        <permission name="android.permission.WRITE_CONTACTS" fixed="false"/>
+    </exception>
+
     <exception package="com.google.android.apps.cbrsnetworkmonitor">
         <!-- Location access to create CBRS geofences-->
         <permission name="android.permission.ACCESS_FINE_LOCATION" fixed="true"/>
