@@ -645,9 +645,6 @@ on post-fs-data
 
     restart storageproxyd
 
-on post-fs-data-checkpointed
-    restart storageproxyd
-
 service storageproxyd /vendor/bin/storageproxyd \
 	-d /dev/trusty-ipc-dev0 \
 	-r /dev/sg1 \
