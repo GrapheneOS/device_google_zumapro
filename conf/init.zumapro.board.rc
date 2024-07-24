@@ -81,7 +81,6 @@ on init
     start vendor.keymaster-4-0
 
     # ZRAM setup
-    write /sys/block/zram0/comp_algorithm lz77eh
     write /proc/sys/vm/page-cluster 0
 
     # Some user code relies on ro.boot.hardware.revision
@@ -175,6 +174,14 @@ on init
 
     # Enable CPU Idle histograms
     write /sys/kernel/metrics/cpuidle_histogram/enable 1
+
+# ZRAM setup: use EH in 4kb kernels.
+on init && property:ro.boot.hardware.cpu.pagesize=4096
+    write /sys/block/zram0/comp_algorithm lz77eh
+
+# ZRAM setup: do not use EH in 16kb kernels.
+on init && property:ro.boot.hardware.cpu.pagesize=16384
+    write /sys/block/zram0/comp_algorithm lzo-rle
 
 on post-fs
     # Ensure device is ready and start storageproxyd
@@ -636,6 +643,9 @@ on post-fs-data
     chown system system /data/vendor/ss/persist/0
     chown system system /data/vendor/ss/persist/nsp
 
+    restart storageproxyd
+
+on post-fs-data-checkpointed
     restart storageproxyd
 
 service storageproxyd /vendor/bin/storageproxyd \
