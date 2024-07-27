@@ -221,6 +221,7 @@ ifneq ($(BOARD_WITHOUT_RADIO),true)
 # The "power-anomaly-sitril" is added into PRODUCT_SOONG_NAMESPACES when
 # $(USE_LASSEN_OEMHOOK) is true and $(BOARD_WITHOUT_RADIO) is not true.
 PRODUCT_SOONG_NAMESPACES += vendor/google/tools/power-anomaly-sitril
+$(call soong_config_set,sitril,use_lassen_oemhook_with_radio,true)
 
 $(call inherit-product-if-exists, vendor/samsung_slsi/telephony/$(BOARD_USES_SHARED_VENDOR_TELEPHONY)/common/device-vendor.mk)
 
