@@ -518,4 +518,11 @@
 
     <!-- The intent action to handle oem-enabled satellite SOS messaging. -->
     <string name="config_satellite_emergency_handover_intent_action">com.google.android.apps.stargate.ACTION_ESOS_QUESTIONNAIRE</string>
+
+    <!-- User activity timeout: Maximum screen dim duration in milliseconds. -->
+    <integer name="config_maximumScreenDimDuration">20000</integer>
+
+    <!-- User activity timeout: Maximum screen dim duration as a percentage of screen off timeout.
+    -->
+    <fraction name="config_maximumScreenDimRatio">33%</fraction>
 </resources>

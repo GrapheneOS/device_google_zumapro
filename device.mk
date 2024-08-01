@@ -1070,6 +1070,9 @@ PRODUCT_PACKAGES += \
 	android.hardware.health-service.zumapro_recovery \
 
 # Audio
+# Audio Vendor Prebuilt
+$(call soong_config_set,aoc_spk_post_processing,prebuilts_dir,$(RELEASE_GOOGLE_SPKPOSTPROCESSING_ZUMAPRO_DIR))
+
 # Audio HAL Server & Default Implementations
 ifeq ($(USE_AUDIO_HAL_AIDL),true)
 include device/google/gs-common/audio/aidl.mk
