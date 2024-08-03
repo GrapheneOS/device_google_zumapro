@@ -1,10 +1,10 @@
 import /vendor/etc/init/hw/init.zumapro.usb.rc
+import /vendor/etc/init/hw/init.efs.rc
 import android.hardware.drm@1.2-service.widevine.rc
 import init.exynos.sensorhub.rc
 import /vendor/etc/init/hw/init.${ro.boot.hardware.platform}.soc.rc
 
 on early-init
-    mount_all /vendor/etc/fstab.persist --early
     write /proc/sys/kernel/sched_pelt_multiplier 1
     write /sys/kernel/mm/lru_gen/enabled n
 

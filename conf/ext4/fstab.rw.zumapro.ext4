@@ -1,0 +1,5 @@
+# Android fstab file for /data and /metadata partitions.
+#
+#<src>                                                   <mnt_point>                 <type>  <mnt_flags and options>  <fs_mgr_flags>
+/dev/block/platform/13200000.ufs/by-name/metadata        /metadata                   ext4    noatime,nosuid,nodev,sync  wait,check,formattable,first_stage_mount
+/dev/block/platform/13200000.ufs/by-name/userdata        /data                       ext4    noatime,nosuid,nodev    latemount,wait,check,quota,formattable,sysfs_path=/dev/sys/block/bootdevice,reservedsize=128M,readahead_size_kb=128

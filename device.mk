@@ -438,7 +438,8 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
 	device/google/zumapro/conf/init.zumapro.soc.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.zumapro.soc.rc \
 	device/google/zumapro/conf/init.zuma.soc.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.zuma.soc.rc \
-	device/google/zumapro/conf/init.zumapro.board.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.zumapro.board.rc
+	device/google/zumapro/conf/init.zumapro.board.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.zumapro.board.rc \
+	device/google/zumapro/conf/init.efs.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.efs.rc
 
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_COPY_FILES += \
@@ -453,6 +454,14 @@ PRODUCT_COPY_FILES += \
 	device/google/zumapro/conf/init.recovery.device.rc:$(TARGET_COPY_OUT_RECOVERY)/root/init.recovery.zuma.rc
 
 # Fstab files
+ifeq (ext4,$(TARGET_RW_FILE_SYSTEM_TYPE))
+PRODUCT_SOONG_NAMESPACES += \
+        device/google/zumapro/conf/ext4
+else
+PRODUCT_SOONG_NAMESPACES += \
+        device/google/zumapro/conf/f2fs
+endif
+
 PRODUCT_PACKAGES += \
 	fstab.zuma \
 	fstab.zumapro \
@@ -465,7 +474,8 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_COPY_FILES += \
 	device/google/$(TARGET_BOARD_PLATFORM)/conf/fstab.persist:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.persist \
-	device/google/$(TARGET_BOARD_PLATFORM)/conf/fstab.modem:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.modem
+	device/google/$(TARGET_BOARD_PLATFORM)/conf/fstab.modem:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.modem \
+	device/google/$(TARGET_BOARD_PLATFORM)/conf/fstab.rw.efs:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.efs
 
 # Shell scripts
 PRODUCT_PACKAGES += \

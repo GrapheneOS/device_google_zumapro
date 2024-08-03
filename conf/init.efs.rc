@@ -1,0 +1,5 @@
+on early-init
+    mount_all /vendor/etc/fstab.persist --early
+
+on late-fs
+    mount_all /vendor/etc/fstab.efs --early
