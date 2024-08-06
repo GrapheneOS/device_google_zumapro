@@ -1271,3 +1271,5 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # since it can't be overridden from /vendor.
 PRODUCT_PRODUCT_PROPERTIES += \
 	dumpstate.strict_run=false
+
+PRODUCT_NO_BIONIC_PAGE_SIZE_MACRO := true
