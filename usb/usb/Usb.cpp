@@ -54,6 +54,7 @@ namespace usb_flags = android::hardware::usb::flags;
 using aidl::android::frameworks::stats::IStats;
 using android::base::GetProperty;
 using android::base::Join;
+using android::base::ParseInt;
 using android::base::ParseUint;
 using android::base::Tokenize;
 using android::base::Trim;
@@ -101,7 +102,9 @@ constexpr char kThermalZoneForTempReadPrimary[] = "usb_pwr_therm2";
 constexpr char kThermalZoneForTempReadSecondary1[] = "usb_pwr_therm";
 constexpr char kThermalZoneForTempReadSecondary2[] = "qi_therm";
 constexpr char kPogoUsbActive[] = "/sys/devices/platform/google,pogo/pogo_usb_active";
+constexpr char kPogoEnableHub[] = "/sys/devices/platform/google,pogo/enable_hub";
 constexpr char kPogoEnableUsb[] = "/sys/devices/platform/google,pogo/enable_usb";
+constexpr char kInternalHubDevnum[] = "/sys/bus/usb/devices/1-1/devnum";
 constexpr char kPowerSupplyUsbType[] = "/sys/class/power_supply/usb/usb_type";
 constexpr char kIrqHpdCount[] = "irq_hpd_count";
 constexpr char kUdcUeventRegex[] =
@@ -524,11 +527,16 @@ void updatePortStatus(android::hardware::usb::Usb *usb) {
     queryVersionHelper(usb, &currentPortStatus);
 }
 
-static int usbDeviceRemoved(const char *devname, void* client_data) {
-    return 0;
+static int getInternalHubUniqueId() {
+    string internalHubDevnum;
+    int devnum = 0, internalHubUniqueId = -1;
+    if (ReadFileToString(kInternalHubDevnum, &internalHubDevnum) &&
+        ParseInt(Trim(internalHubDevnum).c_str(), &devnum))
+        internalHubUniqueId = 1000 + devnum;
+    return internalHubUniqueId;
 }
 
-static int usbDeviceAdded(const char *devname, void* client_data) {
+static Status tuneInternalHub(const char *devname, void* client_data) {
     uint16_t vendorId, productId;
     struct usb_device *device;
     ::aidl::android::hardware::usb::Usb *usb;
@@ -537,7 +545,7 @@ static int usbDeviceAdded(const char *devname, void* client_data) {
     device = usb_device_open(devname);
     if (!device) {
         ALOGE("usb_device_open failed\n");
-        return 0;
+        return Status::ERROR;
     }
 
     usb = (::aidl::android::hardware::usb::Usb *)client_data;
@@ -558,6 +566,26 @@ static int usbDeviceAdded(const char *devname, void* client_data) {
     }
 
     usb_device_close(device);
+
+    return Status::SUCCESS;
+}
+
+static int usbDeviceRemoved(const char *devname, void* client_data) {
+    return 0;
+}
+
+static int usbDeviceAdded(const char *devname, void* client_data) {
+    string pogoEnableHub;
+    int uniqueId = 0;
+
+    // Enable hub tuning when the pogo dock is connected.
+    if (ReadFileToString(kPogoEnableHub, &pogoEnableHub) && Trim(pogoEnableHub) == "1") {
+        // If enable_hub is set to 1, the internal hub is the first enumearted device on bus 1 and
+        // port 1.
+        uniqueId = usb_device_get_unique_id_from_name(devname);
+        if (uniqueId == getInternalHubUniqueId())
+            tuneInternalHub(devname, client_data);
+    }
 
     return 0;
 }

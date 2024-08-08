@@ -25,6 +25,8 @@ package {
 
 filegroup {
     name: "fstab.zumapro.common",
-    srcs: ["fstab.zumapro.common"],
+    srcs: ["fstab.ro.system",
+           "fstab.zumapro.common"
+    ],
 }
 
