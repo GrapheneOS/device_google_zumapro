@@ -180,6 +180,7 @@ void dumpMaxFg() {
 
     const char *maxfg [][2] = {
             {"Power supply property maxfg", "/sys/class/power_supply/maxfg/uevent"},
+            {"maxfg registers", "/sys/class/power_supply/maxfg/registers_dump"},
             {"m5_state", "/sys/class/power_supply/maxfg/m5_model_state"},
             {"maxfg logbuffer", "/dev/logbuffer_maxfg"},
             {"maxfg_monitor logbuffer", "/dev/logbuffer_maxfg_monitor"},
@@ -187,6 +188,7 @@ void dumpMaxFg() {
 
     const char *max77779fgFiles [][2] = {
             {"Power supply property max77779fg", "/sys/class/power_supply/max77779fg/uevent"},
+            {"max77779fg registers", "/sys/class/power_supply/max77779fg/registers_dump"},
             {"model_state", "/sys/class/power_supply/max77779fg/model_state"},
             {"max77779fg logbuffer", "/dev/logbuffer_max77779fg"},
             {"max77779fg_monitor logbuffer", "/dev/logbuffer_max77779fg_monitor"},
@@ -195,6 +197,8 @@ void dumpMaxFg() {
     const char *maxfgSecondary [][2] = {
             {"Power supply property maxfg_base", "/sys/class/power_supply/maxfg_base/uevent"},
             {"Power supply property maxfg_secondary", "/sys/class/power_supply/maxfg_secondary/uevent"},
+            {"maxfg_base registers", "/sys/class/power_supply/maxfg_base/registers_dump"},
+            {"maxfg_secondary registers", "/sys/class/power_supply/maxfg_secondary/registers_dump"},
             {"model_state", "/sys/class/power_supply/maxfg_base/model_state"},
             {"maxfg_base", "/dev/logbuffer_maxfg_base"},
             {"maxfg_secondary", "/dev/logbuffer_maxfg_secondary"},
