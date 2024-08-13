@@ -547,6 +547,15 @@ void dumpChgUserDebug() {
     }
 }
 
+void dumpScratchpad() {
+    const char *title = "max77779sp registers dump";
+    const char *file = "/sys/devices/platform/108d0000.hsi2c/i2c-6/6-0060/registers_dump";
+
+    if (isValidFile(file)) {
+        dumpFileContent(title, file);
+    }
+}
+
 void dumpBatteryEeprom() {
     const char *title = "Battery EEPROM";
     const char *files[] {
@@ -1106,6 +1115,7 @@ int main() {
     dumpBatteryDefend();
     dumpChg();
     dumpChgUserDebug();
+    dumpScratchpad();
     dumpBatteryEeprom();
     dumpChargerStats();
     dumpWlcLogs();
