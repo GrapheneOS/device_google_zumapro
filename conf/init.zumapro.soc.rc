@@ -44,6 +44,19 @@ on init
     write /proc/vendor_sched/groups/ta/rampup_multiplier 1
     write /proc/vendor_sched/adpf_rampup_multiplier 2
 
+    write /proc/vendor_sched/groups/bg/disable_util_est 1
+    write /proc/vendor_sched/groups/cam/disable_util_est 0
+    write /proc/vendor_sched/groups/cam_power/disable_util_est 0
+    write /proc/vendor_sched/groups/dex2oat/disable_util_est 1
+    write /proc/vendor_sched/groups/fg/disable_util_est 1
+    write /proc/vendor_sched/groups/nnapi/disable_util_est 1
+    write /proc/vendor_sched/groups/ota/disable_util_est 1
+    write /proc/vendor_sched/groups/rt/disable_util_est 1
+    write /proc/vendor_sched/groups/sf/disable_util_est 0
+    write /proc/vendor_sched/groups/sys/disable_util_est 1
+    write /proc/vendor_sched/groups/sys_bg/disable_util_est 1
+    write /proc/vendor_sched/groups/ta/disable_util_est 0
+
     # governor setting
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor sched_pixel
     write /sys/devices/system/cpu/cpu0/cpufreq/sched_pixel/up_rate_limit_us 500

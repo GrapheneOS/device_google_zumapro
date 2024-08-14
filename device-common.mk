@@ -14,7 +14,9 @@
 # limitations under the License.
 #
 
+ifneq ($(BOARD_WITHOUT_RADIO), true)
 -include vendor/google_devices/zumapro/proprietary/telephony/device-vendor.mk
+endif
 include device/google/zumapro/device.mk
 
 # Telephony
