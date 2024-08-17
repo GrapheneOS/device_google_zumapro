@@ -216,7 +216,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 endif
 
 PRODUCT_PROPERTY_OVERRIDES += \
-	persist.sys.hdcp_checking=always
+	persist.sys.hdcp_checking=drm-only
 
 USE_LASSEN_OEMHOOK := true
 ifneq ($(BOARD_WITHOUT_RADIO),true)
