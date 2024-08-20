@@ -321,6 +321,12 @@
     <!-- Telephony satellite service package name to bind to by default. -->
     <string name="config_satellite_service_package">com.google.android.satellite</string>
 
+    <!-- The time duration in millis after which Telephony will stop waiting for the response of the
+         satellite enable request from modem, and send failure response to the client that has
+         requested Telephony to enable satellite.
+         -->
+    <integer name="config_wait_for_satellite_enabling_response_timeout_millis">240000</integer>
+
     <!-- Telephony pointing UI package name to be launched. -->
     <string name="config_pointing_ui_package">com.google.android.apps.scone</string>
 
@@ -518,6 +524,9 @@
 
     <!-- The intent action to handle oem-enabled satellite SOS messaging. -->
     <string name="config_satellite_emergency_handover_intent_action">com.google.android.apps.stargate.ACTION_ESOS_QUESTIONNAIRE</string>
+
+    <!-- The intent action to handle oem-enabled satellite demo mode SOS messaging. -->
+    <string name="config_satellite_demo_mode_sos_intent_action">com.google.android.apps.stargate.ACTION_ESOS_DEMO</string>
 
     <!-- User activity timeout: Maximum screen dim duration in milliseconds. -->
     <integer name="config_maximumScreenDimDuration">20000</integer>
