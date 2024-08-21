@@ -49,6 +49,7 @@ constexpr char kTcpcDevName[] = "i2c-max77759tcpc";
 constexpr char kI2cClientId[] = "0025";
 constexpr char kAccessoryLimitCurrent[] = "usb_limit_accessory_current";
 constexpr char kAccessoryLimitCurrentEnable[] = "usb_limit_accessory_enable";
+constexpr char kUpdateSdpEnumTimeout[] = "update_sdp_enum_timeout";
 
 UsbGadget::UsbGadget() : mGadgetIrqPath(""),
     mI2cClientPath("") {
@@ -103,6 +104,7 @@ Status UsbGadget::getUsbGadgetIrqPath() {
 void currentFunctionsAppliedCallback(bool functionsApplied, void *payload) {
     UsbGadget *gadget = (UsbGadget *)payload;
     gadget->mCurrentUsbFunctionsApplied = functionsApplied;
+    gadget->updateSdpEnumTimeout();
 }
 
 ScopedAStatus UsbGadget::getCurrentUsbFunctions(const shared_ptr<IUsbGadgetCallback> &callback,
@@ -369,6 +371,28 @@ ScopedAStatus UsbGadget::reset(const shared_ptr<IUsbGadgetCallback> &callback,
     return ScopedAStatus::ok();
 }
 
+void UsbGadget::updateSdpEnumTimeout() {
+    string update_sdp_enum_timeout_path;
+
+    if (mI2cClientPath.empty()) {
+        for (int i = 0; i < NUM_HSI2C_PATHS; ++i) {
+            mI2cClientPath = getI2cClientPath(kHsi2cPaths[i], kTcpcDevName, kI2cClientId);
+            if (mI2cClientPath.empty()) {
+                ALOGE("%s: Unable to locate i2c bus node", __func__);
+            } else {
+                break;
+            }
+        }
+    }
+
+    update_sdp_enum_timeout_path = mI2cClientPath + kUpdateSdpEnumTimeout;
+    if (!WriteStringToFile("1", update_sdp_enum_timeout_path)) {
+        ALOGE("%s: Unable to write to %s.", __func__, update_sdp_enum_timeout_path.c_str());
+    } else {
+        ALOGI("%s: Updated SDP enumeration timeout value.", __func__);
+    }
+}
+
 Status UsbGadget::setupFunctions(long functions,
         const shared_ptr<IUsbGadgetCallback> &callback, uint64_t timeout,
         int64_t in_transactionId) {
@@ -427,6 +451,7 @@ Status UsbGadget::setupFunctions(long functions,
         mCurrentUsbFunctionsApplied = true;
         if (callback)
             callback->setCurrentUsbFunctionsCb(functions, Status::SUCCESS, in_transactionId);
+        updateSdpEnumTimeout();
         return Status::SUCCESS;
     }
 
