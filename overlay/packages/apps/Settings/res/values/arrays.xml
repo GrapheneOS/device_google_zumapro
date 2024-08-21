@@ -15,8 +15,4 @@
 -->
 
 <resources>
-  <!-- Packages that will not show Display over other apps permission -->
-  <string-array name="display_over_apps_permission_change_exempt" translatable="false">
-    <item>com.google.android.apps.scone</item>
-  </string-array>
 </resources>
