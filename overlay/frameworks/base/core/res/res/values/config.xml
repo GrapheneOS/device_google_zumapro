@@ -319,21 +319,6 @@
     <!-- Pre-scale volume at volume step 3 for Absolute Volume -->
     <fraction name="config_prescaleAbsoluteVolume_index3">100%</fraction>
 
-    <!-- Telephony satellite service package name to bind to by default. -->
-    <string name="config_satellite_service_package">com.google.android.satellite</string>
-
-    <!-- The time duration in millis after which Telephony will stop waiting for the response of the
-         satellite enable request from modem, and send failure response to the client that has
-         requested Telephony to enable satellite.
-         -->
-    <integer name="config_wait_for_satellite_enabling_response_timeout_millis">240000</integer>
-
-    <!-- Telephony pointing UI package name to be launched. -->
-    <string name="config_pointing_ui_package">com.google.android.apps.scone</string>
-
-    <!-- Telephony pointing UI class name to be launched. -->
-    <string name="config_pointing_ui_class">com.google.android.apps.scone.satellite.pointingui.ui.PointingUiActivity</string>
-
     <!-- Boolean indicating if restoring network selection should be skipped -->
     <!-- The restoring is handled by modem if it is true -->
     <bool translatable="false" name="skip_restoring_network_selection">true</bool>
@@ -479,61 +464,6 @@
         <item>200</item>
     </integer-array>
 
-    <!-- The identifier of the satellite's SIM profile. The identifier is composed of MCC and MNC
-         of the satellite PLMN with the format "mccmnc". -->
-    <string name="config_satellite_sim_plmn_identifier">90198</string>
-
-    <!-- The identifier for the satellite's SIM profile. The identifier is the service provider name
-         (spn) from the profile metadata. -->
-    <string name="config_satellite_sim_spn_identifier">Skylo</string>
-
-    <!-- Telephony satellite gateway service package name to bind to by default. -->
-    <string name="config_satellite_gateway_service_package">com.google.android.apps.stargate</string>
-
-    <!-- The class name to receive the intent for provisioning. -->
-    <string name="config_satellite_carrier_roaming_esos_provisioned_class">com.google.android.apps.stargate.registration.RegistrationReceiver_Receiver</string>
-
-    <!-- List of country codes where oem-enabled satellite services are either allowed or disallowed
-         by the device. Each country code is a lowercase 2 character ISO-3166-1 alpha-2. -->
-    <string-array name="config_oem_enabled_satellite_country_codes">
-        <item>US</item>
-        <item>PR</item>
-        <item>CA</item>
-        <item>AT</item>
-        <item>BE</item>
-        <item>BG</item>
-        <item>HR</item>
-        <item>CY</item>
-        <item>CZ</item>
-        <item>DK</item>
-        <item>EE</item>
-        <item>FI</item>
-        <item>FR</item>
-        <item>DE</item>
-        <item>GR</item>
-        <item>HU</item>
-        <item>IE</item>
-        <item>IT</item>
-        <item>LV</item>
-        <item>LT</item>
-        <item>LU</item>
-        <item>NL</item>
-        <item>NO</item>
-        <item>PL</item>
-        <item>PT</item>
-        <item>RO</item>
-        <item>SK</item>
-        <item>SI</item>
-        <item>ES</item>
-        <item>SE</item>
-        <item>CH</item>
-        <item>GB</item>
-    </string-array>
-
-    <!-- The file storing S2-cell-based satellite access restriction of the countries defined by
-         config_oem_enabled_satellite_countries. -->
-    <string name="config_oem_enabled_satellite_s2cell_file">/vendor/etc/telephony/sats2.dat</string>
-
     <!-- The time duration in millis after which cellular scanning will be enabled and satellite
          will move to IDLE state. This timeout duration is used for satellite with NB IOT radio
          technologies.
@@ -554,44 +484,9 @@
          -->
     <integer name="config_datagram_wait_for_connected_state_timeout_millis">180000</integer>
 
-    <!-- The package name of the app to handle oem-enabled satellite SOS messaging. -->
-    <string name="config_oem_enabled_satellite_sos_handover_app">com.google.android.apps.stargate;com.google.android.apps.stargate.questionnaire.QuestionnaireHomeActivity</string>
-
-    <!-- The intent action to handle esp loopback eSOS messaging. -->
-    <string name="config_satellite_test_with_esp_replies_intent_action">com.google.android.apps.stargate.ACTION_ESOS_QUESTIONNAIRE_TEST_WITH_ESP_REPLIES</string>
-
-    <!-- The intent action to handle oem-enabled satellite SOS messaging. -->
-    <string name="config_satellite_emergency_handover_intent_action">com.google.android.apps.stargate.ACTION_ESOS_QUESTIONNAIRE</string>
-
-    <!-- The intent action to handle oem-enabled satellite demo mode SOS messaging. -->
-    <string name="config_satellite_demo_mode_sos_intent_action">com.google.android.apps.stargate.ACTION_ESOS_DEMO</string>
-
-    <!-- The receiver class of the intent action to start satellite non-emergency mode -->
-    <string name="config_satellite_carrier_roaming_non_emergency_session_class">com.google.android.apps.stargate.sessionmanager.SessionManagerReceiver_Receiver</string>
-
     <!-- Whether to show the system notification to users whenever there is a change
          in the satellite availability state at the current location. -->
     <bool name="config_satellite_should_notify_availability">false</bool>
-
-    <!-- The absolute path to the satellite config file. -->
-    <string name="satellite_access_config_file">/vendor/etc/telephony/satellite_access_config.json</string>
-
-    <!-- Whether to allow check message datagrams to be sent even when the satellite modem is in
-         not connected state. -->
-    <bool name="config_satellite_allow_check_message_in_not_connected">true</bool>
-
-    <!-- Whether to allow TN scanning during satellite session. -->
-    <bool name="config_satellite_allow_tn_scanning_during_satellite_session">false</bool>
-
-     <!-- A string defines the NIDD (Non-IP Data Delivery) APN to be used for satellite attachment. For more on NIDD,
-         see 3GPP TS 29.542. This config is used for an NTN-only subscription, which requires activation before being used.
-         -->
-    <string name="config_satellite_nidd_apn_name">pixel.ntn</string>
-
-    <!-- List of integer tag Ids representing VZW satellite coverage. -->
-    <integer-array name="config_verizon_satellite_enabled_tagids">
-        <item>1001</item>
-    </integer-array>
 
     <!-- Whether device supports increased touch sensitvity -->
     <bool name="config_supportGloveMode">true</bool>
