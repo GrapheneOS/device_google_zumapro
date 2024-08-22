@@ -1153,6 +1153,9 @@ PRODUCT_PACKAGES_DEBUG += BatteryStatsViewer
 # (TODO: b/169535506) This includes the FCM for system_ext and product partition.
 # It must be split into the FCM of each partition.
 DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += device/google/zumapro/device_framework_matrix_product.xml
+DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += device/google/gs-common/proprietary/android.hardware.gnss.xml
+DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += device/google/gs-common/proprietary/vendor.google.aam.xml
+DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += device/google/gs-common/proprietary/vendor.google.whitechapel.audio.extension.xml
 
 # Keymint configuration
 PRODUCT_COPY_FILES += \
