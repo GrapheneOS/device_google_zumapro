@@ -24,11 +24,11 @@ PRODUCT_COPY_FILES += \
 ifneq ($(BOARD_WITHOUT_RADIO),true)
 # product permissions XML from stock
 PRODUCT_COPY_FILES += \
-    device/google/zuma/product-permissions-stock.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/product-permissions-stock.xml
+    device/google/zumapro/product-permissions-stock.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/product-permissions-stock.xml
 endif
 
 PRODUCT_COPY_FILES += \
-    device/google/zuma/system_ext-permissions-stock.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/system_ext-permissions-stock.xml
+    device/google/zumapro/system_ext-permissions-stock.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/system_ext-permissions-stock.xml
 
 # Android Verified Boot
 PRODUCT_COPY_FILES += \
