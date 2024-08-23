@@ -1961,7 +1961,7 @@ int UsbExt::setPortSecurityStateInner(PortSecurityState in_state) {
         }
     }
 
-    if (!mUsb->mI2cClientPath.empty()) {
+    if (mUsb->mI2cClientPath.empty()) {
         ALOGE("%s: Unable to locate i2c bus node", __func__);
         return IUsbExt::ERROR_NO_I2C_PATH;
     }
