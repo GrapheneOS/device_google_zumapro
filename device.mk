@@ -646,6 +646,9 @@ PRODUCT_PROPERTY_OVERRIDES += aaudio.mmap_policy=2
 PRODUCT_PROPERTY_OVERRIDES += aaudio.mmap_exclusive_policy=2
 PRODUCT_PROPERTY_OVERRIDES += aaudio.hw_burst_min_usec=2000
 
+# Set util_clamp_min for s/w spatializer
+PRODUCT_PROPERTY_OVERRIDES += audio.spatializer.effect.util_clamp_min=300
+
 # Calliope firmware overwrite
 #PRODUCT_COPY_FILES += \
 	device/google/zumapro/firmware/calliope_dram.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/calliope_dram.bin \
@@ -1275,3 +1278,4 @@ PRODUCT_PRODUCT_PROPERTIES += \
 	dumpstate.strict_run=false
 
 PRODUCT_NO_BIONIC_PAGE_SIZE_MACRO := true
+PRODUCT_CHECK_PREBUILT_MAX_PAGE_SIZE := true
