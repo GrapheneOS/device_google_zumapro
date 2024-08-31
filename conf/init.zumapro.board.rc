@@ -392,6 +392,7 @@ on fs
     chown system system /sys/class/backlight/panel0-backlight/dimming_on
     chown system system /sys/class/backlight/panel0-backlight/hbm_mode
     chown system system /sys/class/backlight/panel0-backlight/local_hbm_mode
+    chown system system /sys/class/backlight/panel0-backlight/local_hbm_delay_frames
     chown system system /sys/devices/platform/exynos-drm/primary-panel/gamma
     chown system system /sys/devices/platform/exynos-drm/primary-panel/min_vrefresh
     chown system system /sys/devices/platform/exynos-drm/primary-panel/idle_delay_ms

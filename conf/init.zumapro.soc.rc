@@ -181,9 +181,9 @@ on property:sys.boot_completed=1
     write /sys/kernel/vendor_mm/kcompactd_cpu_affinity 7f
 
     # Restore prefer idle
-    write /proc/vendor_sched/groups/ta/preferred_idle_mask_low 0xff
-    write /proc/vendor_sched/groups/ta/preferred_idle_mask_mid 0xff
-    write /proc/vendor_sched/groups/ta/preferred_idle_mask_high 0xff
+    write /proc/vendor_sched/groups/ta/preferred_idle_mask_low 0x7f
+    write /proc/vendor_sched/groups/ta/preferred_idle_mask_mid 0x7f
+    write /proc/vendor_sched/groups/ta/preferred_idle_mask_high 0x7f
     write /proc/vendor_sched/groups/fg/preferred_idle_mask_low 0xff
     write /proc/vendor_sched/groups/fg/preferred_idle_mask_mid 0xff
     write /proc/vendor_sched/groups/fg/preferred_idle_mask_high 0xff
