@@ -103,8 +103,8 @@ constexpr char kThermalZoneForTempReadSecondary1[] = "usb_pwr_therm";
 constexpr char kThermalZoneForTempReadSecondary2[] = "qi_therm";
 constexpr char kPogoUsbActive[] = "/sys/devices/platform/google,pogo/pogo_usb_active";
 constexpr char kPogoEnableHub[] = "/sys/devices/platform/google,pogo/enable_hub";
-constexpr char kPogoEnableUsb[] = "/sys/devices/platform/google,pogo/enable_usb";
 constexpr char kInternalHubDevnum[] = "/sys/bus/usb/devices/1-1/devnum";
+constexpr char KPogoMoveDataToUsb[] = "/sys/devices/platform/google,pogo/move_data_to_usb";
 constexpr char kPowerSupplyUsbType[] = "/sys/class/power_supply/usb/usb_type";
 constexpr char kIrqHpdCount[] = "irq_hpd_count";
 constexpr char kUdcUeventRegex[] =
@@ -245,12 +245,12 @@ ScopedAStatus Usb::enableUsbDataWhileDocked(const string& in_portName,
     ALOGI("Userspace enableUsbDataWhileDocked  opID:%ld", in_transactionId);
 
     int flags = O_RDONLY;
-    ::android::base::unique_fd fd(TEMP_FAILURE_RETRY(open(kPogoEnableUsb, flags)));
+    ::android::base::unique_fd fd(TEMP_FAILURE_RETRY(open(KPogoMoveDataToUsb, flags)));
     if (fd != -1) {
         notSupported = false;
-        success = WriteStringToFile("1", kPogoEnableUsb);
+        success = WriteStringToFile("1", KPogoMoveDataToUsb);
         if (!success) {
-            ALOGE("Write to enable_usb failed");
+            ALOGE("Write to move_data_to_usb failed");
         }
     }
 
@@ -996,7 +996,13 @@ Status getPortStatusHelper(android::hardware::usb::Usb *usb,
             string pogoUsbActive = "0";
             if (ReadFileToString(string(kPogoUsbActive), &pogoUsbActive) &&
                 stoi(Trim(pogoUsbActive)) == 1) {
-                (*currentPortStatus)[i].usbDataStatus.push_back(UsbDataStatus::DISABLED_DOCK);
+                /*
+                 * Always signal USB device mode disabled irrespective of hub enabled while docked.
+                 * Hub gets automatically enabled as needed. Signalling DISABLED_DOCK_HOST_MODE &
+                 * DEVICE_MODE during pogo direct can cause notifications to show for brief windows
+                 * when the state machine is still moving to steady state.
+                 */
+                (*currentPortStatus)[i].usbDataStatus.push_back(UsbDataStatus::DISABLED_DOCK_DEVICE_MODE);
                 dataEnabled = false;
             }
             if (!usb->mUsbDataEnabled) {
