@@ -219,6 +219,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	persist.sys.hdcp_checking=drm-only
 
 USE_LASSEN_OEMHOOK := true
+
+# Pixel Logger
+include hardware/google/pixel/PixelLogger/PixelLogger.mk
+
 ifneq ($(BOARD_WITHOUT_RADIO),true)
 # The "power-anomaly-sitril" is added into PRODUCT_SOONG_NAMESPACES when
 # $(USE_LASSEN_OEMHOOK) is true and $(BOARD_WITHOUT_RADIO) is not true.
@@ -273,9 +277,6 @@ PRODUCT_PACKAGES += \
 # Vendor modem extensive logging default property
 PRODUCT_PROPERTY_OVERRIDES += \
 	persist.vendor.modem.extensive_logging_enabled=false
-
-# Pixel Logger
-include hardware/google/pixel/PixelLogger/PixelLogger.mk
 
 # Use Lassen specifc Shared Modem Platform
 SHARED_MODEM_PLATFORM_VENDOR := lassen
