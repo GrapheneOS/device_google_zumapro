@@ -16,6 +16,9 @@
 include build/make/target/board/BoardConfigMainlineCommon.mk
 include build/make/target/board/BoardConfigPixelCommon.mk
 
+# Include settings for 16k page size kernel if enabled.
+include device/google/zumapro/BoardConfig-16k-common.mk
+
 # HACK : To fix up after bring up multimedia devices.
 TARGET_SOC := zumapro
 
