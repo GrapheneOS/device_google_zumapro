@@ -324,8 +324,14 @@ else
 TARGET_USES_VULKAN = true
 endif
 
+# "vendor/arm" doesn't exist in PDK build
+ifeq (,$(realpath $(TOPDIR)vendor/arm/mali/valhall/Android.bp))
+PRODUCT_SOONG_NAMESPACES += \
+	vendor/google_devices/zumapro/prebuilts/gpu
+else
 PRODUCT_SOONG_NAMESPACES += \
 	vendor/arm/mali/valhall
+endif
 
 $(call soong_config_set,pixel_mali,soc,$(TARGET_BOARD_PLATFORM))
 # TODO (b/297408842): The gralloc is being open-sourced, and we cannot pass
