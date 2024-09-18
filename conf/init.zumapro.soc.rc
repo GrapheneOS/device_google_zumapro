@@ -27,6 +27,7 @@ on init
     write /proc/vendor_sched/groups/fg/prefer_idle 1
     write /proc/vendor_sched/groups/sys/uclamp_min 190
     write /proc/vendor_sched/groups/sys/prefer_idle 1
+    write /proc/vendor_sched/groups/fg_wi/prefer_idle 1
     # Make sure little core don't go below 820MHz
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 820000
 
@@ -35,6 +36,7 @@ on init
     write /proc/vendor_sched/groups/cam_power/rampup_multiplier 1
     write /proc/vendor_sched/groups/dex2oat/rampup_multiplier 0
     write /proc/vendor_sched/groups/fg/rampup_multiplier 0
+    write /proc/vendor_sched/groups/fg_wi/rampup_multiplier 1
     write /proc/vendor_sched/groups/nnapi/rampup_multiplier 0
     write /proc/vendor_sched/groups/ota/rampup_multiplier 0
     write /proc/vendor_sched/groups/rt/rampup_multiplier 0
@@ -49,6 +51,7 @@ on init
     write /proc/vendor_sched/groups/cam_power/disable_util_est 0
     write /proc/vendor_sched/groups/dex2oat/disable_util_est 1
     write /proc/vendor_sched/groups/fg/disable_util_est 1
+    write /proc/vendor_sched/groups/fg_wi/disable_util_est 0
     write /proc/vendor_sched/groups/nnapi/disable_util_est 1
     write /proc/vendor_sched/groups/ota/disable_util_est 1
     write /proc/vendor_sched/groups/rt/disable_util_est 1
@@ -130,6 +133,16 @@ on init
     write /sys/class/devfreq/gs_memlat_devfreq:devfreq_mif_cpu6_memlat@17000010/mem_latency/stall_floor 2400
     write /sys/class/devfreq/gs_memlat_devfreq:devfreq_mif_cpu7_memlat@17000010/mem_latency/stall_floor 500
 
+    # Prefer Asymmetric MTE mode when enabled
+    write /sys/devices/system/cpu/cpu0/mte_tcf_preferred asymm
+    write /sys/devices/system/cpu/cpu1/mte_tcf_preferred asymm
+    write /sys/devices/system/cpu/cpu2/mte_tcf_preferred asymm
+    write /sys/devices/system/cpu/cpu3/mte_tcf_preferred asymm
+    write /sys/devices/system/cpu/cpu4/mte_tcf_preferred asymm
+    write /sys/devices/system/cpu/cpu5/mte_tcf_preferred asymm
+    write /sys/devices/system/cpu/cpu6/mte_tcf_preferred asymm
+    write /sys/devices/system/cpu/cpu7/mte_tcf_preferred asymm
+
 on zygote-start
     # For PixelLogger configuration file.
     chmod 0771 /data/vendor/wifi
@@ -155,6 +168,7 @@ on zygote-start
     write /proc/vendor_sched/groups/dex2oat/ug 1
     write /proc/vendor_sched/groups/ta/ug 2
     write /proc/vendor_sched/groups/fg/ug 2
+    write /proc/vendor_sched/groups/fg_wi/ug 2
     write /proc/vendor_sched/groups/nnapi/ug 2
     write /proc/vendor_sched/groups/rt/ug 2
     write /proc/vendor_sched/groups/sf/ug 2
@@ -194,6 +208,7 @@ on property:sys.boot_completed=1
     # Setup final cpuset
     write /dev/cpuset/top-app/cpus 0-7
     write /dev/cpuset/foreground/cpus 0-6
+    write /dev/cpuset/foreground_window/cpus 0-6
     write /dev/cpuset/background/cpus 0-3
     write /dev/cpuset/system-background/cpus 0-3
     write /dev/cpuset/restricted/cpus 0-3

@@ -684,35 +684,6 @@ on post-fs-data
     chown system system /sys/kernel/metrics/thermal/tr_by_group/spmic/stats_reset
 
 on property:vendor.thermal.link_ready=1
-    chown system system /dev/thermal/tz-by-name/soc/mode
-    chown system system /dev/thermal/tz-by-name/vdroop2/trip_point_0_temp
-    chown system system /dev/thermal/tz-by-name/vdroop2/trip_point_0_hyst
-    chown system system /dev/thermal/tz-by-name/vdroop1/trip_point_0_temp
-    chown system system /dev/thermal/tz-by-name/vdroop1/trip_point_0_hyst
-    chown system system /dev/thermal/tz-by-name/smpl_gm/trip_point_0_temp
-    chown system system /dev/thermal/tz-by-name/smpl_gm/trip_point_0_hyst
-    chown system system /dev/thermal/tz-by-name/ocp_cpu1/trip_point_0_temp
-    chown system system /dev/thermal/tz-by-name/ocp_cpu1/trip_point_0_hyst
-    chown system system /dev/thermal/tz-by-name/ocp_cpu2/trip_point_0_temp
-    chown system system /dev/thermal/tz-by-name/ocp_cpu2/trip_point_0_hyst
-    chown system system /dev/thermal/tz-by-name/ocp_tpu/trip_point_0_temp
-    chown system system /dev/thermal/tz-by-name/ocp_tpu/trip_point_0_hyst
-    chown system system /dev/thermal/tz-by-name/ocp_gpu/trip_point_0_temp
-    chown system system /dev/thermal/tz-by-name/ocp_gpu/trip_point_0_hyst
-    chown system system /dev/thermal/tz-by-name/soft_ocp_cpu1/trip_point_0_temp
-    chown system system /dev/thermal/tz-by-name/soft_ocp_cpu1/trip_point_0_hyst
-    chown system system /dev/thermal/tz-by-name/soft_ocp_cpu2/trip_point_0_temp
-    chown system system /dev/thermal/tz-by-name/soft_ocp_cpu2/trip_point_0_hyst
-    chown system system /dev/thermal/tz-by-name/soft_ocp_tpu/trip_point_0_temp
-    chown system system /dev/thermal/tz-by-name/soft_ocp_tpu/trip_point_0_hyst
-    chown system system /dev/thermal/tz-by-name/soft_ocp_gpu/trip_point_0_temp
-    chown system system /dev/thermal/tz-by-name/soft_ocp_gpu/trip_point_0_hyst
-    chown system system /dev/thermal/tz-by-name/soc/trip_point_0_temp
-    chown system system /dev/thermal/tz-by-name/soc/trip_point_0_hyst
-    chown system system /dev/thermal/tz-by-name/batoilo/trip_point_0_temp
-    chown system system /dev/thermal/tz-by-name/batoilo/trip_point_0_hyst
-    chown system system /dev/thermal/tz-by-name/batoilo2/trip_point_0_temp
-    chown system system /dev/thermal/tz-by-name/batoilo2/trip_point_0_hyst
     # Thermal
     chown system system /dev/thermal/tz-by-name/disp_therm/trip_point_0_temp
     chown system system /dev/thermal/tz-by-name/disp_therm/trip_point_0_hyst
