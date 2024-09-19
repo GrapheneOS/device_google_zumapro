@@ -80,6 +80,7 @@ PRODUCT_SOONG_NAMESPACES += \
 	device/google/zumapro \
 	device/google/zumapro/powerstats \
 	vendor/google_devices/common/chre/host/hal \
+	vendor/google_devices/zumapro/proprietary/debugpolicy \
 	vendor/google/whitechapel/tools \
 	vendor/google/interfaces \
 	vendor/google_nos/host/android \
