@@ -51,11 +51,11 @@
     </Decoders>
     <Encoders>
         <MediaCodec name="c2.google.av1.encoder" type="video/av01">
-            <Limit name="size" min="64x64" max="3840x2176" />
+            <Limit name="size" min="80x80" max="3840x2176" />
             <Limit name="alignment" value="1x1" />
             <Limit name="block-size" value="64x64" />
-            <Limit name="block-count" range="1-2040" />
-            <Limit name="blocks-per-second" min="1" max="61200" />
+            <Limit name="block-count" range="4-2040" />
+            <Limit name="blocks-per-second" min="4" max="61200" />
             <Limit name="bitrate" range="1-120000000" />
             <Limit name="performance-point-1280x720" range="200" />
             <Limit name="performance-point-1920x1080" value="180" />
