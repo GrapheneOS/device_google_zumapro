@@ -32,6 +32,7 @@ on init
     chown system system /proc/vendor_sched/groups/dex2oat/set_task_group
     chown system system /proc/vendor_sched/groups/cam_power/set_task_group
     chown system system /proc/vendor_sched/groups/ota/set_task_group
+    chown system system /proc/vendor_sched/groups/fg_wi/set_task_group
     chown system system /proc/vendor_sched/groups/bg/set_proc_group
     chown system system /proc/vendor_sched/groups/cam/set_proc_group
     chown system system /proc/vendor_sched/groups/fg/set_proc_group
@@ -44,6 +45,7 @@ on init
     chown system system /proc/vendor_sched/groups/dex2oat/set_proc_group
     chown system system /proc/vendor_sched/groups/cam_power/set_proc_group
     chown system system /proc/vendor_sched/groups/ota/set_proc_group
+    chown system system /proc/vendor_sched/groups/fg_wi/set_proc_group
     chown system system /proc/vendor_sched/prefer_idle_set
     chown system system /proc/vendor_sched/prefer_idle_clear
     chown system system /proc/vendor_sched/pmu_poll_enable
@@ -63,6 +65,7 @@ on init
     chmod 0220 /proc/vendor_sched/groups/dex2oat/set_task_group
     chmod 0220 /proc/vendor_sched/groups/cam_power/set_task_group
     chmod 0220 /proc/vendor_sched/groups/ota/set_task_group
+    chmod 0220 /proc/vendor_sched/groups/fg_wi/set_task_group
     chmod 0220 /proc/vendor_sched/groups/bg/set_proc_group
     chmod 0220 /proc/vendor_sched/groups/cam/set_proc_group
     chmod 0220 /proc/vendor_sched/groups/fg/set_proc_group
@@ -75,6 +78,7 @@ on init
     chmod 0220 /proc/vendor_sched/groups/dex2oat/set_proc_group
     chmod 0220 /proc/vendor_sched/groups/cam_power/set_proc_group
     chmod 0220 /proc/vendor_sched/groups/ota/set_proc_group
+    chmod 0220 /proc/vendor_sched/groups/fg_wi/set_proc_group
     chmod 0220 /proc/vendor_sched/prefer_idle_set
     chmod 0220 /proc/vendor_sched/prefer_idle_clear
     chmod 0660 /proc/vendor_sched/pmu_poll_enable
