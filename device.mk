@@ -1263,8 +1263,6 @@ include device/google/gs-common/pixel_ril/ril.mk
 endif
 endif
 
-SUPPORT_VENDOR_SATELLITE_SERVICE := true
-
 # Telephony satellite geofence data file
 PRODUCT_COPY_FILES += \
         device/google/zumapro/telephony/sats2.dat:$(TARGET_COPY_OUT_VENDOR)/etc/telephony/sats2.dat
