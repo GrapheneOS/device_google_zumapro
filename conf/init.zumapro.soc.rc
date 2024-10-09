@@ -234,6 +234,9 @@ on property:sys.boot_completed=1
     write /proc/vendor_sched/priority_task_name "ExoPlayer:Place"
     write /proc/vendor_sched/priority_task_boost_value 742
 
+    # To be removed after InputDispatche and InputReader become ADPF
+    write /proc/vendor_sched/prefer_idle_task_name "InputDispatcher,InputReader"
+
 # MTE
 on property:persist.device_config.runtime_native_boot.mode_override=sync
     # Per-core mode overrides.
