@@ -123,6 +123,7 @@
             <Feature name="adaptive-playback" />
             <Feature name="can-swap-width-height" value="1" />
             <Feature name="low-latency" />
+            <Feature name="dynamic-color-aspects" />
         </MediaCodec>
         <MediaCodec name="c2.exynos.vp9.decoder" type="video/x-vnd.on2.vp9" >
             <Limit name="size" min="64x64" max="7680x4352" />
