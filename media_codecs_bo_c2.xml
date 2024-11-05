@@ -31,6 +31,7 @@
           <Limit name="performance-point-3840x2160" value="60" />
           <Feature name="adaptive-playback" />
           <Feature name="can-swap-width-height" value="1" />
+          <Feature name="dynamic-color-aspects" />
         </MediaCodec>
         <MediaCodec name="c2.google.av1.decoder.secure" type="video/av01">
           <Limit name="size" min="96x96" max="3840x2160" />
@@ -47,6 +48,7 @@
           <Feature name="adaptive-playback" />
           <Feature name="secure-playback" required="true" />
           <Feature name="can-swap-width-height" value="1" />
+          <Feature name="dynamic-color-aspects" />
         </MediaCodec>
     </Decoders>
     <Encoders>
