@@ -859,7 +859,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += vendor.display.0.brightness.dimming.usage?
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += vendor.display.1.brightness.dimming.usage?=2
 
 PRODUCT_PROPERTY_OVERRIDES += \
-	persist.sys.sf.native_mode=2
+	persist.sys.sf.color_saturation=1.0
 
 # limit DPP downscale ratio
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += vendor.hwc.dpp.downscale=4
