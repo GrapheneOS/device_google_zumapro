@@ -812,7 +812,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += vendor.display.0.brightness.dimming.usage?
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += vendor.display.1.brightness.dimming.usage?=2
 
 PRODUCT_PROPERTY_OVERRIDES += \
-	persist.sys.sf.native_mode=2
+	persist.sys.sf.color_saturation=1.0
 PRODUCT_COPY_FILES += \
 	device/google/zumapro/display/display_colordata_cal0.pb:$(TARGET_COPY_OUT_VENDOR)/etc/display_colordata_cal0.pb
 
