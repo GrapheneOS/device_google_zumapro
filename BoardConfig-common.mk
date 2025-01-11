@@ -41,9 +41,7 @@ BOARD_KERNEL_CMDLINE += rcupdate.rcu_expedited=1 rcu_nocbs=all rcutree.enable_rc
 BOARD_KERNEL_CMDLINE += swiotlb=noforce
 BOARD_KERNEL_CMDLINE += disable_dma32=on
 BOARD_KERNEL_CMDLINE += sysctl.kernel.sched_pelt_multiplier=4
-ifeq (,$(filter %_fullmte,$(TARGET_PRODUCT)))
-BOARD_KERNEL_CMDLINE += kasan=off
-endif
+BOARD_KERNEL_CMDLINE += kasan.fault=panic kasan.mode=asymm
 BOARD_BOOTCONFIG += androidboot.boot_devices=13200000.ufs
 
 # Enable KUnit for userdebug and eng builds
