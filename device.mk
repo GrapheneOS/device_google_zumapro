@@ -1292,7 +1292,6 @@ PRODUCT_PACKAGES_DEBUG += BatteryStatsViewer
 
 DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += device/google/gs-common/proprietary/android.hardware.gnss.xml
 DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += device/google/gs-common/proprietary/vendor.google.aam.xml
-DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += device/google/gs-common/proprietary/vendor.google.whitechapel.audio.extension.xml
 
 # Keymint configuration
 PRODUCT_COPY_FILES += \
