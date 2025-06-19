@@ -1285,11 +1285,6 @@ include device/google/gs-common/pixel_ril/ril.mk
 endif
 endif
 
-# Telephony satellite geofence data file
-PRODUCT_COPY_FILES += \
-        device/google/zumapro/telephony/sats2.dat:$(TARGET_COPY_OUT_VENDOR)/etc/telephony/sats2.dat \
-        device/google/zumapro/telephony/satellite_access_config.json:$(TARGET_COPY_OUT_VENDOR)/etc/telephony/satellite_access_config.json
-
 # Touch service
 include device/google/gs-common/touch/twoshay/aidl_zuma.mk
 include device/google/gs-common/touch/twoshay/twoshay.mk
