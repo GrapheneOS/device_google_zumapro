@@ -117,13 +117,6 @@ PRODUCT_PRODUCT_PROPERTIES += \
 	ro.logcat.compress=true
 endif
 
-# SIT-RIL Logging setting
-PRODUCT_PROPERTY_OVERRIDES += \
-	persist.vendor.ril.log_mask=3 \
-	persist.vendor.ril.log.base_dir=/data/vendor/radio/sit-ril \
-	persist.vendor.ril.log.chunk_size=5242880 \
-	persist.vendor.ril.log.num_file=3
-
 # Enable reboot free DSDS
 PRODUCT_PRODUCT_PROPERTIES += \
 	persist.radio.reboot_on_modem_change=false
@@ -131,14 +124,6 @@ PRODUCT_PRODUCT_PROPERTIES += \
 # Configure DSDS by default
 PRODUCT_PRODUCT_PROPERTIES += \
 	persist.radio.multisim.config=dsds
-
-# Enable Early Camping
-PRODUCT_PRODUCT_PROPERTIES += \
-	persist.vendor.ril.camp_on_earlier=1
-
-# Enable SET_SCREEN_STATE request
-PRODUCT_PROPERTY_OVERRIDES += \
-	persist.vendor.ril.enable_set_screen_state=1
 
 # Set the Bluetooth Class of Device
 # Service Field: 0x5A -> 90
