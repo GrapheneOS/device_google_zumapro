@@ -237,9 +237,6 @@ $(call soong_config_set,sitril,use_lassen_oemhook_with_radio,true)
 
 $(call inherit-product-if-exists, vendor/samsung_slsi/telephony/$(BOARD_USES_SHARED_VENDOR_TELEPHONY)/common/device-vendor.mk)
 
-# modem_ml_svc_sit daemon
-PRODUCT_PACKAGES += modem_ml_svc_sit
-
 # TODO: b/350624523 - Add back modem ML TFLite service after it is ready.
 # ifeq (,$(filter aosp_%,$(TARGET_PRODUCT)))
 # # Modem ML TFLite service.
@@ -252,17 +249,6 @@ PRODUCT_PACKAGES += modem_ml_svc_sit
 
 # PRODUCT_SYSTEM_SERVER_JARS += system_ext:modemml-tflite-service
 # endif
-
-# modem ML models configs
-ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
-PRODUCT_COPY_FILES += \
-	device/google/zumapro/modem_ml/modem_ml_nnapi_models_userdebug.conf:$(TARGET_COPY_OUT_VENDOR)/etc/modem_ml_models.conf \
-	device/google/zumapro/modem_ml/modem_ml_tflite_models_userdebug.conf:$(TARGET_COPY_OUT_VENDOR)/etc/modem_ml_tflite_models.conf
-else
-PRODUCT_COPY_FILES += \
-	device/google/zumapro/modem_ml/modem_ml_nnapi_models_user.conf:$(TARGET_COPY_OUT_VENDOR)/etc/modem_ml_models.conf \
-	device/google/zumapro/modem_ml/modem_ml_tflite_models_user.conf:$(TARGET_COPY_OUT_VENDOR)/etc/modem_ml_tflite_models.conf
-endif
 
 # modem logging binary/configs
 PRODUCT_PACKAGES += modem_logging_control
