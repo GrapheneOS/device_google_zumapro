@@ -1298,11 +1298,5 @@ PRODUCT_CHECK_DEV_TYPE_VIOLATIONS := true
 PRODUCT_PROPERTY_OVERRIDES += \
     debug.bugle.enable_emergency_satellite_messaging=true
 
-# Allow longer timeout for incident report generation in bugreport
-# Overriding in /product partition instead of /vendor intentionally,
-# since it can't be overridden from /vendor.
-PRODUCT_PRODUCT_PROPERTIES += \
-	dumpstate.strict_run=false
-
 PRODUCT_NO_BIONIC_PAGE_SIZE_MACRO := true
 PRODUCT_CHECK_PREBUILT_MAX_PAGE_SIZE := true
