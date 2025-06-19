@@ -117,52 +117,6 @@ PRODUCT_PRODUCT_PROPERTIES += \
 	ro.logcat.compress=true
 endif
 
-# Set the Bluetooth Class of Device
-# Service Field: 0x5A -> 90
-#    Bit 14: LE audio
-#    Bit 17: Networking
-#    Bit 19: Capturing
-#    Bit 20: Object Transfer
-#    Bit 22: Telephony
-# MAJOR_CLASS: 0x42 -> 66 (Phone)
-# MINOR_CLASS: 0x0C -> 12 (Smart Phone)
-PRODUCT_PRODUCT_PROPERTIES += \
-    bluetooth.device.class_of_device=90,66,12
-
-# Set supported Bluetooth profiles to enabled
-PRODUCT_PRODUCT_PROPERTIES += \
-	bluetooth.profile.asha.central.enabled=true \
-	bluetooth.profile.a2dp.source.enabled=true \
-	bluetooth.profile.avrcp.target.enabled=true \
-	bluetooth.profile.bap.unicast.client.enabled=true \
-	bluetooth.profile.bas.client.enabled=true \
-	bluetooth.profile.csip.set_coordinator.enabled=true \
-	bluetooth.profile.gatt.enabled=true \
-	bluetooth.profile.hap.client.enabled=true \
-	bluetooth.profile.hfp.ag.enabled=true \
-	bluetooth.profile.hid.device.enabled=true \
-	bluetooth.profile.hid.host.enabled=true \
-	bluetooth.profile.map.server.enabled=true \
-	bluetooth.profile.mcp.server.enabled=true \
-	bluetooth.profile.opp.enabled=true \
-	bluetooth.profile.pan.nap.enabled=true \
-	bluetooth.profile.pan.panu.enabled=true \
-	bluetooth.profile.pbap.server.enabled=true \
-	bluetooth.profile.sap.server.enabled=true \
-	bluetooth.profile.ccp.server.enabled=true \
-	bluetooth.profile.vcp.controller.enabled=true
-
-# Override default HCI command timeout value for BT stack
-PRODUCT_PRODUCT_PROPERTIES += \
-    bluetooth.hci.timeout_milliseconds=5000
-
-# Carrier configuration default location
-PRODUCT_PROPERTY_OVERRIDES += \
-	persist.vendor.radio.config.carrier_config_dir=/vendor/firmware/carrierconfig
-
-PRODUCT_PROPERTY_OVERRIDES += \
-	telephony.active_modems.max_count=2
-
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_PROPERTY_OVERRIDES += \
 	persist.vendor.usb.displayport.enabled=1
