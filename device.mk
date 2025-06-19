@@ -117,14 +117,6 @@ PRODUCT_PRODUCT_PROPERTIES += \
 	ro.logcat.compress=true
 endif
 
-# Enable reboot free DSDS
-PRODUCT_PRODUCT_PROPERTIES += \
-	persist.radio.reboot_on_modem_change=false
-
-# Configure DSDS by default
-PRODUCT_PRODUCT_PROPERTIES += \
-	persist.radio.multisim.config=dsds
-
 # Set the Bluetooth Class of Device
 # Service Field: 0x5A -> 90
 #    Bit 14: LE audio
