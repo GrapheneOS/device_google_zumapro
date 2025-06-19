@@ -71,21 +71,9 @@ endif
 
 PRODUCT_SOONG_NAMESPACES += \
 	hardware/google/av \
-	hardware/google/gchips \
-	hardware/google/gchips/gralloc4 \
-	hardware/google/graphics/common \
-	hardware/google/graphics/zuma \
-	hardware/google/graphics/zumapro/libhwc2.1 \
 	hardware/google/interfaces \
 	hardware/google/pixel \
 	device/google/zumapro \
-	vendor/google_devices/common/chre/host/hal \
-	vendor/google_devices/zumapro/proprietary/debugpolicy \
-	vendor/google/whitechapel/tools \
-	vendor/google/interfaces \
-	vendor/google_nos/host/android \
-	vendor/google_nos/test/system-test-harness \
-	vendor/google/camera
 
 LOCAL_KERNEL := $(TARGET_KERNEL_DIR)/Image.lz4
 
