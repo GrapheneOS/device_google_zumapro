@@ -1142,6 +1142,7 @@ endif
 include device/google/gs-common/touch/twoshay/aidl_zuma.mk
 include device/google/gs-common/touch/twoshay/twoshay.mk
 
+# TODO: Ensure that GIA is needed in 9th gen pixels
 ifeq ($(RELEASE_PIXEL_GIA_ENABLED),true)
 include device/google/gs-common/input/gia/gia.mk
 endif
