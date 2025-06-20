@@ -343,16 +343,9 @@ else
 DEVICE_MANIFEST_FILE += \
 	device/google/zumapro/manifest_media_aosp.xml
 endif
-
-PRODUCT_COPY_FILES += \
-	device/google/zumapro/media_codecs_aosp_c2.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_c2.xml
 else
 DEVICE_MANIFEST_FILE += \
 	device/google/zumapro/manifest_media.xml
-
-PRODUCT_COPY_FILES += \
-	device/google/zumapro/media_codecs_bo_c2.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_c2.xml \
-	device/google/zumapro/media_codecs_aosp_c2.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_aosp_c2.xml
 endif
 
 DEVICE_PACKAGE_OVERLAYS += device/google/zumapro/overlay
@@ -830,9 +823,6 @@ include device/google/gs-common/mediacodec/samsung/mediacodec_samsung.mk
 include device/google/gs-common/mediacodec/bigwave/mediacodec_bigwave.mk
 $(call soong_config_set,bigw,soc,zuma)
 
-PRODUCT_COPY_FILES += \
-	device/google/zumapro/media_codecs_performance_c2.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_performance_c2.xml \
-
 PRODUCT_PROPERTY_OVERRIDES += \
        debug.c2.use_dmabufheaps=1 \
        media.c2.dmabuf.padding=512 \
@@ -852,11 +842,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	debug.stagefright.c2inputsurface=-1 \
 
 PRODUCT_PROPERTY_OVERRIDES += media.c2.hal.selection=aidl
-
-# 2. OpenMAX IL
-PRODUCT_COPY_FILES += \
-	device/google/zumapro/media_codecs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs.xml \
-	device/google/zumapro/media_codecs_performance.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_performance.xml
 ####################################
 
 # Telephony
