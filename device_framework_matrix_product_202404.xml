@@ -195,4 +195,12 @@
             <instance>sced0</instance>
         </interface>
     </hal>
+    <hal format="aidl" optional="true">
+        <name>com.google.input</name>
+        <version>5</version>
+        <interface>
+            <name>ITwoshayNotificationService</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
 </compatibility-matrix>
