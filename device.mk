@@ -230,17 +230,10 @@ $(call soong_config_set,arm_gralloc,soc,zuma)
 
 include device/google/gs-common/gpu/gpu.mk
 
-PRODUCT_PACKAGES += \
-	csffw_image_prebuilt__firmware_prebuilt_ttux_mali_csffw.bin \
-	libGLES_mali \
-	vulkan.mali \
-	libgpudataproducer
-
 # Install the OpenCL ICD Loader
 PRODUCT_SOONG_NAMESPACES += external/OpenCL-ICD-Loader
 PRODUCT_PACKAGES += \
-	libOpenCL \
-	mali_icd__customer_pixel_opencl-icd_ARM.icd
+	libOpenCL
 ifeq ($(DEVICE_IS_64BIT_ONLY),false)
 PRODUCT_PACKAGES += \
 	mali_icd__customer_pixel_opencl-icd_ARM32.icd
