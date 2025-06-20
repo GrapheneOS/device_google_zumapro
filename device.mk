@@ -426,24 +426,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	persist.vendor.verbose_logging_enabled=false
 endif
 
-# CP Logging properties
-PRODUCT_PROPERTY_OVERRIDES += \
-	ro.vendor.sys.modem.logging.loc = /data/vendor/slog \
-	persist.vendor.sys.silentlog.tcp = "On" \
-	ro.vendor.cbd.modem_removable = "1" \
-	ro.vendor.cbd.modem_type = "s5100sit" \
-	persist.vendor.sys.modem.logging.br_num=10 \
-	persist.vendor.sys.modem.logging.enable=true
-
-# Enable silent CP crash handling
-ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
-PRODUCT_PROPERTY_OVERRIDES += \
-	persist.vendor.ril.crash_handling_mode=1
-else
-PRODUCT_PROPERTY_OVERRIDES += \
-	persist.vendor.ril.crash_handling_mode=2
-endif
-
 # Add support dual SIM mode
 PRODUCT_PROPERTY_OVERRIDES += \
 	persist.vendor.radio.multisim_switch_support=true
