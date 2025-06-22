@@ -122,22 +122,6 @@ include hardware/google/pixel/PixelLogger/PixelLogger.mk
 
 ifneq ($(BOARD_WITHOUT_RADIO),true)
 
-# modem logging binary/configs
-PRODUCT_PACKAGES += modem_logging_control
-
-# libeomservice_proxy binary/configs
-PRODUCT_PACKAGES += liboemservice_proxy_default
-
-# modem logging configs
-PRODUCT_PACKAGES += \
-	logging.conf \
-	default.cfg \
-	default.nprf \
-	default_metrics.xml \
-	Pixel_stability.cfg \
-	Pixel_stability.nprf \
-	extensive_logging.conf
-
 # Vendor modem extensive logging default property
 PRODUCT_PROPERTY_OVERRIDES += \
 	persist.vendor.modem.extensive_logging_enabled=false
