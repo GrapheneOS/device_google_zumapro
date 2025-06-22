@@ -370,10 +370,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	persist.vendor.verbose_logging_enabled=false
 endif
 
-# Add support dual SIM mode
-PRODUCT_PROPERTY_OVERRIDES += \
-	persist.vendor.radio.multisim_switch_support=true
-
 # RPMB TA
 PRODUCT_PACKAGES += \
 	tlrpmb
