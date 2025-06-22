@@ -431,24 +431,6 @@ include hardware/google/pixel/rebalance_interrupts/rebalance_interrupts.mk
 # Audio HALs
 #
 
-# Audio Configurations
-#USE_LEGACY_LOCAL_AUDIO_HAL := false
-#USE_XML_AUDIO_POLICY_CONF := 1
-
-# Cannot reference variables defined in BoardConfig.mk, uncomment this if
-# BOARD_USE_OFFLOAD_AUDIO and BOARD_USE_OFFLOAD_EFFECT are true
-## AudioEffectHAL library
-#PRODUCT_PACKAGES += \
-#	libexynospostprocbundle
-
-# Cannot reference variables defined in BoardConfig.mk, uncomment this if
-# BOARD_USE_SOUNDTRIGGER_HAL is true
-#PRODUCT_PACKAGES += \
-#	sound_trigger.primary.maran9820
-
-# A-Box Service Daemon
-#PRODUCT_PACKAGES += main_abox
-
 # Libs
 PRODUCT_PACKAGES += \
 	com.android.future.usb.accessory
