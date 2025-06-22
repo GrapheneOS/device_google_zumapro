@@ -435,14 +435,6 @@ include hardware/google/pixel/rebalance_interrupts/rebalance_interrupts.mk
 #USE_LEGACY_LOCAL_AUDIO_HAL := false
 #USE_XML_AUDIO_POLICY_CONF := 1
 
-# Enable AAudio MMAP/NOIRQ data path.
-PRODUCT_PROPERTY_OVERRIDES += aaudio.mmap_policy=2
-PRODUCT_PROPERTY_OVERRIDES += aaudio.mmap_exclusive_policy=2
-PRODUCT_PROPERTY_OVERRIDES += aaudio.hw_burst_min_usec=2000
-
-# Set util_clamp_min for s/w spatializer
-PRODUCT_PROPERTY_OVERRIDES += audio.spatializer.effect.util_clamp_min=300
-
 # Cannot reference variables defined in BoardConfig.mk, uncomment this if
 # BOARD_USE_OFFLOAD_AUDIO and BOARD_USE_OFFLOAD_EFFECT are true
 ## AudioEffectHAL library
