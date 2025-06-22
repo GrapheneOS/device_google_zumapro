@@ -122,10 +122,6 @@ include hardware/google/pixel/PixelLogger/PixelLogger.mk
 
 ifneq ($(BOARD_WITHOUT_RADIO),true)
 
-# Vendor modem extensive logging default property
-PRODUCT_PROPERTY_OVERRIDES += \
-	persist.vendor.modem.extensive_logging_enabled=false
-
 # Use Lassen specifc Shared Modem Platform
 SHARED_MODEM_PLATFORM_VENDOR := lassen
 
