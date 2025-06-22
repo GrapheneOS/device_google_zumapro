@@ -240,33 +240,16 @@ PRODUCT_VENDOR_PROPERTIES += \
 PRODUCT_SHIPPING_API_LEVEL := $(SHIPPING_API_LEVEL)
 
 # Device Manifest, Device Compatibility Matrix for Treble
-#
-# Install product specific framework compatibility matrix
-# (TODO: b/169535506) This includes the FCM for system_ext and product partition.
-# It must be split into the FCM of each partition.
-ifeq ($(PRODUCT_SHIPPING_API_LEVEL),35)
-DEVICE_MANIFEST_FILE := \
-	device/google/zumapro/manifest_202404.xml
-DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += device/google/zumapro/device_framework_matrix_product_202404.xml
-DEVICE_MATRIX_FILE := \
-	device/google/zumapro/compatibility_matrix_202404.xml
-else
 DEVICE_MANIFEST_FILE := \
 	device/google/zumapro/manifest.xml
 DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += device/google/zumapro/device_framework_matrix_product_8.xml
 DEVICE_MATRIX_FILE := \
 	device/google/zumapro/compatibility_matrix.xml
-endif
 
 BOARD_USE_CODEC2_AIDL := V1
 ifneq (,$(filter aosp_%,$(TARGET_PRODUCT)))
-ifeq ($(PRODUCT_SHIPPING_API_LEVEL),35)
-DEVICE_MANIFEST_FILE += \
-	device/google/zumapro/manifest_media_aosp_202404.xml
-else
 DEVICE_MANIFEST_FILE += \
 	device/google/zumapro/manifest_media_aosp.xml
-endif
 else
 DEVICE_MANIFEST_FILE += \
 	device/google/zumapro/manifest_media.xml
