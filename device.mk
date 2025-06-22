@@ -486,9 +486,6 @@ endif
 PRODUCT_PRODUCT_PROPERTIES += \
         vendor.powerhal.adpf.rate=16666666
 
-PRODUCT_COPY_FILES += \
-	device/google/zumapro/task_profiles.json:$(TARGET_COPY_OUT_VENDOR)/etc/task_profiles.json
-
 -include hardware/google/pixel/power-libperfmgr/aidl/device.mk
 
 # IRQ rebalancing.
