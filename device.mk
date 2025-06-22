@@ -367,10 +367,6 @@ PRODUCT_PACKAGES += \
 	fstab.zuma-fips.vendor_ramdisk \
 	fstab.zumapro-fips.vendor_ramdisk
 
-# Shell scripts
-PRODUCT_PACKAGES += \
-	disable_contaminant_detection.sh
-
 include device/google/gs-common/insmod/insmod.mk
 
 # Insmod config files
