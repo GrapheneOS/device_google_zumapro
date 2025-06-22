@@ -124,19 +124,6 @@ ifneq ($(BOARD_WITHOUT_RADIO),true)
 
 $(call inherit-product-if-exists, vendor/samsung_slsi/telephony/$(BOARD_USES_SHARED_VENDOR_TELEPHONY)/common/device-vendor.mk)
 
-# TODO: b/350624523 - Add back modem ML TFLite service after it is ready.
-# ifeq (,$(filter aosp_%,$(TARGET_PRODUCT)))
-# # Modem ML TFLite service.
-# PRODUCT_PACKAGES += modemml-tflite-service \
-# 	libtensorflowlite_jni
-
-# # Allow TFLite service modules to be installed to the system partition
-# PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST += \
-# 	system/lib64/libtensorflowlite_jni.so
-
-# PRODUCT_SYSTEM_SERVER_JARS += system_ext:modemml-tflite-service
-# endif
-
 # modem logging binary/configs
 PRODUCT_PACKAGES += modem_logging_control
 
