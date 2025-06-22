@@ -122,8 +122,6 @@ include hardware/google/pixel/PixelLogger/PixelLogger.mk
 
 ifneq ($(BOARD_WITHOUT_RADIO),true)
 
-$(call inherit-product-if-exists, vendor/samsung_slsi/telephony/$(BOARD_USES_SHARED_VENDOR_TELEPHONY)/common/device-vendor.mk)
-
 # modem logging binary/configs
 PRODUCT_PACKAGES += modem_logging_control
 
