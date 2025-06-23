@@ -524,8 +524,6 @@ endif
 PRODUCT_PROPERTY_OVERRIDES += \
 	vendor.camera.multicam.enable_p23_multicam=true
 
-PRODUCT_SYSTEM_PROPERTIES += ro.launcher.blur.appLaunch=0
-
 # Must align with HAL types Dataspace
 # The data space of wide color gamut composition preference is Dataspace::DISPLAY_P3
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.surface_flinger.wcg_composition_dataspace=143261696
