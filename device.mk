@@ -251,12 +251,6 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_PACKAGES += fsck.f2fs.vendor
 
-
-# Recovery files
-PRODUCT_COPY_FILES += \
-	device/google/zumapro/conf/init.recovery.device.rc:$(TARGET_COPY_OUT_RECOVERY)/root/init.recovery.zumapro.rc \
-	device/google/zumapro/conf/init.recovery.device.rc:$(TARGET_COPY_OUT_RECOVERY)/root/init.recovery.zuma.rc
-
 # Fstab files
 ifeq (true,$(TARGET_BOOTS_16K))
 PRODUCT_SOONG_NAMESPACES += \
