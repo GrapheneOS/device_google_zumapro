@@ -821,22 +821,9 @@ PRODUCT_SOONG_NAMESPACES += \
 $(call soong_config_set,aoc,target_soc,zumapro)
 $(call soong_config_set,aoc,target_product,$(TARGET_PRODUCT))
 
-#
-## Audio properties
-PRODUCT_PROPERTY_OVERRIDES += \
-	persist.vendor.audio.cca.unsupported=false
-
-PRODUCT_PROPERTY_OVERRIDES += \
-	ro.config.vc_call_vol_steps=7 \
-	ro.audio.monitorRotation = true \
-	ro.audio.offload_wakelock=false
-
 ifneq (,$(OVERRIDE_MEDIA_VOLUME_STEPS))
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.config.media_vol_steps=$(OVERRIDE_MEDIA_VOLUME_STEPS)
-else
-PRODUCT_PROPERTY_OVERRIDES += \
-	ro.config.media_vol_steps=25
 endif
 
 # vndservicemanager and vndservice no longer included in API 30+, however needed by vendor code.
