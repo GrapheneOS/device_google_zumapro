@@ -547,8 +547,6 @@ include device/google/gs-common/mediacodec/samsung/mediacodec_samsung.mk
 # for Bigwave C2 Hal
 include device/google/gs-common/mediacodec/bigwave/mediacodec_bigwave.mk
 $(call soong_config_set,bigw,soc,zuma)
-
-PRODUCT_PROPERTY_OVERRIDES += media.c2.hal.selection=aidl
 ####################################
 
 # CBD (CP booting deamon)
