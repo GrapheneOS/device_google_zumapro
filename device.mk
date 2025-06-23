@@ -602,10 +602,6 @@ ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_PRODUCT_PROPERTIES += \
 	persist.bluetooth.bqr.event_mask?=262174 \
 	persist.bluetooth.bqr.min_interval_ms=500
-else
-PRODUCT_PRODUCT_PROPERTIES += \
-	persist.bluetooth.bqr.event_mask?=30 \
-	persist.bluetooth.bqr.min_interval_ms=500
 endif
 
 #VNDK
