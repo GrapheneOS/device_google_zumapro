@@ -516,19 +516,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.software.ipsec_tunnels.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.ipsec_tunnels.xml \
 
-PRODUCT_PROPERTY_OVERRIDES += \
-	debug.slsi_platform=1 \
-	debug.hwc.winupdate=1
-
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_PACKAGES += displaycolor_service
 endif
-
-PRODUCT_PROPERTY_OVERRIDES += \
-	debug.sf.disable_backpressure=0 \
-	debug.sf.enable_gl_backpressure=1 \
-	debug.sf.enable_sdr_dimming=1 \
-        debug.sf.dim_in_gamma_in_enhanced_screenshots=1
 
 # Camera
 PRODUCT_PROPERTY_OVERRIDES += \
