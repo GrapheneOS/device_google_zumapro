@@ -777,10 +777,6 @@ endif
 # Enable to build standalone vendor_kernel_boot image.
 PRODUCT_BUILD_VENDOR_KERNEL_BOOT_IMAGE := true
 
-# Enable zygote critical window.
-PRODUCT_PROPERTY_OVERRIDES += \
-	zygote.critical_window.minute=10
-
 # Suspend properties
 PRODUCT_PROPERTY_OVERRIDES += \
     suspend.short_suspend_threshold_millis=5000
