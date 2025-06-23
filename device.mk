@@ -777,10 +777,6 @@ endif
 # Enable to build standalone vendor_kernel_boot image.
 PRODUCT_BUILD_VENDOR_KERNEL_BOOT_IMAGE := true
 
-# Suspend properties
-PRODUCT_PROPERTY_OVERRIDES += \
-    suspend.short_suspend_threshold_millis=5000
-
 # Enable Incremental on the device
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.incremental.enable=true
