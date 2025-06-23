@@ -527,14 +527,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
 	persist.sys.sf.color_saturation=1.0
 
-# Cannot reference variables defined in BoardConfig.mk, uncomment this if
-# BOARD_USES_EXYNOS_DSS_FEATURE is true
-## set the dss enable status setup
-#PRODUCT_PROPERTY_OVERRIDES += \
-#        ro.exynos.dss=1
-
-# Cannot reference variables defined in BoardConfig.mk, uncomment this if
-# BOARD_USES_EXYNOS_AFBC_FEATURE is true
 # set the dss enable status setup
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.vendor.ddk.set.afbc=1
