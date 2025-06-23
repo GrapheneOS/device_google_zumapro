@@ -597,10 +597,6 @@ PRODUCT_PACKAGES += \
 	libdisplaycolor \
 	libdisplaypanel
 
-# Storage: for factory reset protection feature
-PRODUCT_PROPERTY_OVERRIDES += \
-	ro.frp.pst=/dev/block/by-name/frp
-
 # System props to enable Bluetooth Quality Report (BQR) feature
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_PRODUCT_PROPERTIES += \
