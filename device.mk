@@ -527,9 +527,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
 	persist.sys.sf.color_saturation=1.0
 
-# limit DPP downscale ratio
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += vendor.hwc.dpp.downscale=4
-
 # Cannot reference variables defined in BoardConfig.mk, uncomment this if
 # BOARD_USES_EXYNOS_DSS_FEATURE is true
 ## set the dss enable status setup
