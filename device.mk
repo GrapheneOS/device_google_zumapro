@@ -236,6 +236,8 @@ DEVICE_MANIFEST_FILE += \
 	device/google/zumapro/manifest_media.xml
 endif
 
+PRODUCT_PACKAGES += GosOverlay GosSettingsOverlay
+
 DEVICE_PACKAGE_OVERLAYS += device/google/zumapro/overlay
 
 # RKP VINTF
