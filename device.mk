@@ -238,8 +238,6 @@ endif
 
 PRODUCT_PACKAGES += GosOverlay GosSettingsOverlay
 
-DEVICE_PACKAGE_OVERLAYS += device/google/zumapro/overlay
-
 # RKP VINTF
 -include vendor/google_nos/host/android/hals/keymaster/aidl/strongbox/RemotelyProvisionedComponent-citadel.mk
 
@@ -430,10 +428,6 @@ $(call soong_config_set,lyric,soc,zumapro)
 PRODUCT_PACKAGES += \
 	wificond \
 	libwpa_client
-
-# Connectivity
-PRODUCT_PACKAGES += \
-        ConnectivityOverlay
 
 PRODUCT_PACKAGES_DEBUG += \
 	f2fs_io \
