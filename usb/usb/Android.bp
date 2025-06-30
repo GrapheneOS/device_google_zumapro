@@ -25,50 +25,6 @@ package {
     ],
 }
 
-cc_binary {
-    name: "android.hardware.usb-service",
-    relative_install_path: "hw",
-    vintf_fragments: ["android.hardware.usb-service.xml"],
-    vendor: true,
-    srcs: [
-        "service.cpp",
-        "Usb.cpp",
-        "UsbDataSessionMonitor.cpp",
-    ],
-    shared_libs: [
-        "libbase",
-        "libbinder",
-        "libhidlbase",
-        "liblog",
-        "libusbhost",
-        "libutils",
-        "libhardware",
-        "android.hardware.thermal@1.0",
-        "android.hardware.thermal@2.0",
-        "android.hardware.thermal-V1-ndk",
-        "android.hardware.usb.gadget@1.0",
-        "android.hardware.usb-V3-ndk",
-        "android.hardware.usb.gadget-V1-ndk",
-        "libcutils",
-        "android.frameworks.stats-V2-ndk",
-        "pixelatoms-cpp",
-        "libbinder_ndk",
-        "libprotobuf-cpp-lite",
-        "server_configurable_flags",
-        "libaconfig_storage_read_api_cc",
-    ],
-    static_libs: [
-        "libpixelusb-aidl",
-        "libpixelstats",
-        "libthermalutils",
-        "android.hardware.usb.flags-aconfig-c-lib",
-    ],
-    export_shared_lib_headers: [
-        "android.frameworks.stats-V2-ndk",
-        "pixelatoms-cpp",
-    ],
-}
-
 prebuilt_etc {
     name: "usb_service_init_rc_i2c6",
     vendor: true,
@@ -83,10 +39,4 @@ prebuilt_etc {
     filename: "android.hardware.usb-service-i2c11.rc",
     src: "android.hardware.usb-service-i2c11.rc",
     sub_dir: "init",
-}
-
-cc_aconfig_library {
-    name: "android.hardware.usb.flags-aconfig-c-lib",
-    vendor: true,
-    aconfig_declarations: "android.hardware.usb.flags-aconfig",
 }
